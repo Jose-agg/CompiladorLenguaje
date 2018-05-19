@@ -1,0 +1,20 @@
+struct Punto {
+	 x:int;
+	 y:int;
+};
+
+var b:int;
+
+f(p:int) {
+}
+
+main() {
+	var c:int;
+	var p:Punto;
+
+	b = f(8.5);
+	c.x = 10;
+	p.edad = 3;
+	p[5] = b;
+}
+

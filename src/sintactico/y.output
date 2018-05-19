@@ -1,0 +1,27 @@
+   0  $accept : program $end
+
+   1  program : ';'
+
+state 0
+	$accept : . program $end  (0)
+
+	';'  shift 1
+	.  error
+
+	program  goto 2
+
+
+state 1
+	program : ';' .  (1)
+
+	.  reduce 1
+
+
+state 2
+	$accept : program . $end  (0)
+
+	$end  accept
+
+
+7 terminals, 2 nonterminals
+2 grammar rules, 3 states

@@ -1,0 +1,30 @@
+/*
+Este ejemplo tiene varios errores semánticos que el compilador debe detectar en la
+fase de identificación y otros que no deben ser detectados aún.
+
+*/
+
+
+struct Persona {
+	edad:int;
+	meses:[12] int;
+	edad:float;  // Campo repetido 
+};
+
+var k:[10] Window;	// Estructura no definida 
+
+struct Persona {	// Estructura repetida 
+	j:int;
+};
+
+struct Punto {
+	x:int;
+};
+
+var centro:Punto;
+
+main() {
+	print centro.x;
+	print centro.y; // No error en esta fase aunque el campo no está en la struct 
+}
+

@@ -1,0 +1,103 @@
+/*
+Test para probar la Fase de Comprobación de Tipos
+
+COMPROBACION: El compilador del alumno debe detectar todos los errores indicados en los comentarios.
+
+ADVERTENCIA: Hay algunos errores que producen otros errores derivados.
+
+Por ejemplo:
+
+	print juan + anton;	// suma de dos estructuras 
+
+Lo anterior produce el error de que se están sumando dos expresiones de tipos no simples y además
+puede producir el error de que la expresión a imprimir tampoco es de tipo simple (al no quedar
+un tipo simple asociado a la suma al no haberse podido calcular su tipo).
+Estos errores derivados son normales y no es necesario intentar suprimirlos. 
+
+*/
+
+struct Persona {
+	edad:int;
+	meses:[12] int;
+};
+
+var juan:Persona;
+var anton:Persona;
+
+g():Persona {	// Error: Retorno de tipo no simple
+
+}
+
+f(a:[10] int) {	// Los parámetros deben de ser tipos primitivos
+	return 25;	// El return no debe tener expresión en funciones void
+}
+
+h():int {
+	return 5.6;	// Tipo de retorno no coincide
+}
+
+j(a:int, b:float):float {
+	h(2);	// Numero de argumentos incorrecto
+	return; // Debe haber un valor de retorno
+}
+
+main() {
+	var i:int;
+	var f:float;
+	var v:[10]int;
+
+	if(2.5) { }	// La condicion debe ser de tipo entero
+	if (i) { }
+	
+	while(juan) { }	// La condicion debe ser de tipo entero
+	while (i) {}
+	
+	5 = 6; // Valor de la izquierda no modificable
+	i = f; // Valores de distinto tipo
+	juan = anton; // Valor de la izquierda debe ser simple
+
+	read juan;	// Debe ser un tipo simple
+	read 35;	// Debe ser modificable
+	read i;
+	
+	print juan; // Debe ser tipo simple
+	print f / 2.5;
+	
+	j(12, 12.5);
+	j(12, 12); // Tipo de los par�metros no coincide
+	j(12);		// Número de argumentos no coincide
+	j(12, 12.5, 4); // Número de argumentos no coincide
+	
+	print main();	// No tiene tipo de retorno
+	print j(12, 12.5);
+	print j(12, 12); // Tipo de los parámetros no coincide
+	print j(12);		// Número de argumentos no coincide
+	print j(12, 12.5, 4); // Número de argumentos no coincide
+
+	print juan + anton;	// Deben ser tipos simples
+	print 2.5 * 2;		// Deben ser del mismo tipo
+	print i - 2;
+
+	print 2.5 && f;	// Deben ser tipo entero
+	print 2 || i;
+	
+	print juan > anton;	// Deben ser tipos simples
+	print 2.5 < 2;		// Deben ser del mismo tipo
+	print i == 2;
+	
+	print cast<int>(2.5) + i;
+	print cast<Persona>(2.5);	// Tipos simples
+	print cast<int>(juan);		// Expresiones de tipos simples
+	print cast<float>(2.5);		// Deben ser distintos tipos
+	
+	print juan[5];	// Debe ser tipo array
+	print 2[5];	// Debe ser tipo array
+	print v[5.0];	// Debe ser indice entero
+	print v[i+2];
+	
+	print juan.edad;
+	print 5.edad;	// Se requiere tipo struct
+	print juan.nombre; // Campo no definido
+	
+}
+

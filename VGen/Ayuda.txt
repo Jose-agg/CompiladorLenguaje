@@ -1,0 +1,35 @@
+VGen (Visitors Generator)
+Versión 1.3.2
+
+Herramienta didáctica para las prácticas de la asignatura de Diseño de Lenguajes de Programación de la Escuela de Ingeniería Informática (Oviedo)
+
+A partir de una gramática abstracta genera:
+- Los nodos del AST con sus atributos, constructores para inicializarlos y el método accept.
+- El interfaz Visitor, su recorrido por defecto y una plantilla para crear futuros visitor.
+- La clase ASTPrinter para facilitar la validación del AST.
+- Esqueletos de los documentos para la Gramática Atribuída del lenguaje y la Especificación de Código.
+
+
+Sintaxis:
+
+	VGen [opciones] <abstracta.txt>
+
+Opciones (solo para usuarios avanzados):
+
+-object   No genera los constructores con parámetros Object (habrá que hacer los cast en yacc)
+
+-public   Los atributos de los nodos se generan public y sin métodos get/set
+
+-null     Elimina de DefaultVisitor las comprobaciones de null antes de recorrer un hijo (NO RECOMENDADO)
+
+-noToken  Usar esta opción si en yacc no se usa la clase Token con yylval. Se elimina la gestión de linea/columna y las conversiones de Token a tipos primitivos
+
+
+------------------------------------------------------------------------
+Para cualquier errata en los textos o en los fuentes, mandar un mail a:
+raul@uniovi.es
+
+Raúl Izquierdo Castanedo
+Departamento de Informática
+Universidad de Oviedo
+	

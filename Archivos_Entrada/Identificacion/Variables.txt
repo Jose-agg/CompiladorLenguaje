@@ -1,0 +1,41 @@
+/*
+Este ejemplo tiene varios errores semánticos que el compilador debe detectar en la
+fase de identificación y otros que no deben ser detectados aún.
+
+*/
+
+var a:int;
+
+var b:char;
+
+var d:float;
+
+var e:float;
+
+var a:[20] int;	// Variable global repetida 
+
+// ------------- 
+dobleSuma(z:int, b:int, z:float): int { // Parámetro 'z' repetido ('b' no colisiona con global)
+	var local1:int;
+	var local2:int;		
+	var local1:int;		// Local repetida (con otra local) 
+	var b:float;		// Local repetida (con un parámetro) 
+	var d:int;		// Esta no debería dar error, ya que la otra 'd' es global 
+	
+	print a;	
+	print d;
+	print b;	
+	print c;		// variable no definida 
+	print local2;	
+}
+
+prueba() {
+	print z;	// Error: es parámetro de la función anterior
+	print local2;	// Error: es local de la función anterior
+}
+
+
+main() {
+	dobleSuma(5.6);	// No es error en esta fase aunque no coincidan parámetros 
+}
+

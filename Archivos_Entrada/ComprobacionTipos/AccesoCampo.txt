@@ -1,0 +1,18 @@
+struct Persona {
+	edad:int;
+	meses:[12] int;
+};
+
+struct Empresa {
+	jefe:Persona;
+	plantilla:[10] Persona;
+};
+
+f() {
+	var p:Persona;
+	var e:Empresa;
+	
+	print p.edad;
+	print e.jefe.edad;
+	print e.plantilla[5].edad;
+}

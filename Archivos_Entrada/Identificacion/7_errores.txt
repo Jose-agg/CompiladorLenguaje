@@ -1,0 +1,32 @@
+struct Punto {
+	x:int;
+	y:int;
+};
+var b:int;
+
+main() {
+	d = b;		// No esta definida
+	f(8);		// No esta definida
+}
+
+var p:int;
+
+f(p:int) {
+	var p:int;		// Ya esta definida
+}
+
+struct Punto {		// Ya esta definida
+	x:float;
+	y:float;
+};
+
+struct Persona {
+	a: [20]Empresa;		// No esta definida (Empresa)
+};
+
+
+f():real {		// Ya esta definida
+
+}
+
+var b:char;		// Ya esta definida

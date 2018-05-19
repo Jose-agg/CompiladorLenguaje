@@ -1,0 +1,23 @@
+struct Persona {
+	edad:int;
+	meses:[12] int;
+};
+
+var juan:Persona;
+
+g():Persona {	// Error: Retorno de tipo no simple
+
+}
+
+f(a:[10] int) {	// Los parámetros deben de ser tipos primitivos
+	return 25;	// El return no debe tener expresión en funciones void
+}
+
+h():int {
+	return 5.6;	// Tipo de retorno no coincide
+}
+
+j(a:int, b:float):real {
+	h(2);	// Numero de argumentos incorrecto
+	return; // Debe haber un valor de retorno
+}

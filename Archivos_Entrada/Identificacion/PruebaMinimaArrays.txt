@@ -1,0 +1,12 @@
+struct Window{
+	a:int;
+};
+
+var w:[10] Window;		// Necesita lineas 1-3
+
+
+var larga:[4] a;		// Falla siempre
+
+var e:real;	
+
+var otro:[14] e;		// Necesita linea 10
