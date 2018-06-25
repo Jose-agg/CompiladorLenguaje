@@ -92,7 +92,7 @@ public class Identificacion extends DefaultVisitor {
 	@Override
 	public Object visit(InvocacionProcedimiento node, Object param) {
 		DefFuncion definicion = funciones.get(node.getNombre());
-		predicado(definicion != null, "Funcion no definida: " + node.getNombre(), node.getStart());
+		predicado(definicion != null, "Procedimiento no definido: " + node.getNombre(), node.getStart());
 
 		node.setDefFuncion(definicion);
 		return super.visit(node, param);
