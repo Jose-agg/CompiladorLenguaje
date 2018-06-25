@@ -1,0 +1,75 @@
+' Instrucciones:
+' - F7 para avanzar.
+' - F6 para retroceder.
+' - Pararse para leer cada explicación.
+
+' 1) Metadatos para Funciones.
+' El depurador incluye directivas para
+' indicar el nombre, parámetros, 
+' variables locales y tipo de retorno
+' de las funciones.
+
+' Directivas:
+' #func <nombre>
+' #param <nombre>:<tipo>
+' #ret <tipo> / #ret void
+' #local <nombre>:<tipo>
+'
+' Pueden colocarse en cualquier lugar
+' del fichero (la información de cada
+' función puede ir junto con su 
+' código - antes o después - o bien
+' se puede juntar la información de
+' todas las funciones al inicio o final).
+'
+#func Calcula
+#param numero:int
+#param radio:real
+#ret int
+#local persona: {
+ edad:int
+ altura:int
+}
+
+push 12
+push 24
+pushf 35.50
+call Calcula
+
+
+' Tambien se puede identificar que el
+' valor en la cima de la pila (el 24)
+' es un valor de retorno e indica qué
+' función lo dejó.
+add
+
+
+' Por todo ello, se puede explicar al
+' usuario que el 36 en la cima de la 
+' pila se obtuvo de sumar 12 al valor
+' de retorno de la función "Calcula".
+out
+halt	' Fin del ejercicio
+
+
+' Ventaja 1. Nada más entrar en una 
+' función ya se muestra el nombre, 
+' tipo y direccion relativa (BP) de
+' cada parámetro (en violeta de 1016
+' a 1021).
+Calcula:
+nop
+enter 4
+
+' Ventaja 2. Se muestran los nombres de
+' las variables locales y su dirección
+' relativa (direcciones 1008 a 1011).
+nop
+
+pusha bp
+push 8
+add
+load
+
+ret 2, 4, 6
+

@@ -1,0 +1,49 @@
+#source "Arrays.Source.txt"
+
+#global b:byte
+#global i:int
+#global v:10*int
+
+call main
+halt
+
+#func main
+main:
+#line 8
+pusha 3
+push 7
+push 2
+mul
+add
+push 100
+store
+
+#line 10
+pusha 3
+push 7
+push 2
+mul
+add
+load
+out
+
+#line 12
+pusha 1
+push 2
+store
+
+
+#line 13
+pusha 3
+pusha 1
+load
+push 5
+add
+push 2
+mul
+add
+load
+out
+
+#line 14
+ret

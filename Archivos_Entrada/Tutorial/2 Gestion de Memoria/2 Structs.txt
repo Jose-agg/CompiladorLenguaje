@@ -1,0 +1,64 @@
+#source "Structs.Source.txt"
+
+#type Persona: {
+	sueldo:real
+	edad:int	
+	inicial:char
+}
+
+#global a:byte
+#global alberto:Persona
+#global javi:Persona
+
+call main
+halt
+
+#func main
+main:
+
+#line 14
+pusha 1
+push 4
+add
+push 20
+store 
+
+#line 15
+pusha 8
+push 4
+add
+push 20
+store 
+
+#line 17
+pusha 1
+push 6
+add
+pushb 97
+storeb
+
+#line 18
+pusha 8
+push 6
+add
+pushb 97
+storeb
+
+
+#line 20
+pusha 1
+push 0
+add
+pushf 3000.0
+storef
+
+#line 21
+pusha 8
+push 0
+add
+pushf 3000.0
+storef
+
+
+#line 22
+ret

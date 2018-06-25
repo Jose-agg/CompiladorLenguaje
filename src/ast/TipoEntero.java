@@ -4,16 +4,22 @@
 
 package ast;
 
-import visitor.*;
+import visitor.Visitor;
 
-//	tipoEntero:tipo -> 
+// tipoEntero:tipo ->
 
 public class TipoEntero extends AbstractTipo {
 
 	@Override
-	public Object accept(Visitor v, Object param) { 
+	public Object accept(Visitor v, Object param) {
 		return v.visit(this, param);
 	}
 
-}
+	// Extra
 
+	@Override
+	public int getSize() {
+		return 2;
+	}
+
+}

@@ -1,0 +1,86 @@
+' Instrucciones:
+' - F7 para avanzar.
+' - F6 para retroceder.
+' - Pararse para leer cada explicación.
+
+' Metadatos (parte II).
+' Declaración de Structs.
+
+#type Punto: {
+  x:int
+  y:int
+}
+#global coordenada:Punto
+
+
+' Combinación de estructuras con otros
+' tipos compuestos. 
+#type Circulo: {
+  centro:Punto
+  radio:real
+}
+#type Circulos: 2 * Circulo
+
+#global dibujo: Circulos
+
+' El resultado de las directivas
+' anteriores se muestra en el panel
+' central (Memoria Estática).
+nop
+
+' Todas estas directivas son opcionales.
+' Sin embargo es muy sencillo hacer
+' que el Generador de Código las añada
+' y con ello:
+' - Se muestra la disposición de las
+'   variables desde el inicio sin
+'   esperar a su primer acceso.
+' - Se muestra su nombre real en vez
+'   de "Var<n>".
+' - Si es una estructura se muestran
+'   los nombres de los campos.
+' - Si es un array se muestra el
+'   índice de cada elemento.
+' - Se tiene más información para la
+'   detección de errores.
+nop
+
+pusha 4
+push 8
+add
+push 2
+add
+' A medida que se va operando con una
+' dirección se muestra qué variable
+' la ocupa:
+'  33 --> dibujo[1].centro.y
+nop
+
+
+push 1
+sub
+' El verificador avisa si se ha sumado 
+' un desplazamiento incorrecto
+nop
+
+
+push 1
+add
+push 24
+store
+
+
+pusha 50
+load
+' El tener información de todas las
+' variables permite detectar accessos
+' a memoria no reservada.
+' Si no se hubieran declarado las
+' variables con #global, se hubiera
+' inferido erroneamente que en la
+' dirección 50 había una variable. En
+' cambio, por usar #global, se detecta
+' que la dirección no es correcta.
+nop
+
+halt	' Fin del ejercicio

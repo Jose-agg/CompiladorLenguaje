@@ -1,0 +1,8 @@
+// Volver a abrir los ficheros "Fusión Alto Nivel.Source.txt"
+// y "4 Fusion Alto Nivel.txt" con un editor de TXT (como el
+// Bloc de notas). Ver que "push 1" se dibuja en GVM debajo
+// del "print 1" de la línea 6 debido al "#line 6".
+
+print 1;	// Línea 6
+
+print 2 + 3;	// Línea 8

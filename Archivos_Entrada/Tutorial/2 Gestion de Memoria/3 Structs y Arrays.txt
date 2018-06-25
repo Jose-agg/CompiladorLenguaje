@@ -1,0 +1,43 @@
+#source "Structs y Arrays.Source.txt"
+
+#type Persona: {
+	inicial:char
+	notas:3*int
+	sueldo:real
+}
+
+#global a:byte
+#global b:int
+#global juan:Persona
+#global clientes:3*Persona
+
+call main
+halt
+
+#func main
+main:
+
+#line 18
+pusha 3
+push 1
+add
+push 2
+push 2
+mul
+add
+push 5
+store
+
+#line 20
+pusha 14
+push 1
+push 11
+mul
+add
+push 7
+add
+pushf 999.5
+storef
+
+#line 21
+ret

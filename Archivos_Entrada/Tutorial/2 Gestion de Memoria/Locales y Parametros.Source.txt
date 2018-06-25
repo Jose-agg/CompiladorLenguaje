@@ -1,0 +1,17 @@
+
+int a;
+float b;
+char c;
+
+void ejemplo(float par1, int par2) {
+	float local1;
+	float local2;
+
+	b = 3.4;
+	par1 = 3.4;
+	local2 = 3.4;
+}
+
+void main() {
+	ejemplo(1.5, 27);
+}

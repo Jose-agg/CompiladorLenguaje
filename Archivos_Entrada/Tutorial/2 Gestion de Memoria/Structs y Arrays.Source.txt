@@ -1,0 +1,21 @@
+
+struct Persona {
+	char inicial;
+	int notas[3];
+	float sueldo;
+}
+
+byte a;
+int b;
+
+struct Persona juan;
+
+struct Persona clientes[3];
+
+
+void main() 
+{
+	juan.notas[2] = 5;
+
+	clientes[1].sueldo = 999.5;
+}
