@@ -6,7 +6,6 @@ import ast.AccesoArray;
 import ast.AccesoCampo;
 import ast.Asignacion;
 import ast.Cast;
-import ast.Cuerpo;
 import ast.DefCampo;
 import ast.DefEstructura;
 import ast.DefFuncion;
@@ -60,11 +59,8 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		predicado(node.getLeft().isModificable(),
 				"[ERROR] Asignacion: No se puede modificar la expresion de la izquierda", node.getLeft().getStart());
 
-		// Revisa
-		predicado(
-				node.getLeft().getTipo().getClass() != TipoIdent.class
-						&& node.getLeft().getTipo().getClass() != TipoArray.class,
-				"[ERROR] Asignacion: El valor de la izquierda debe ser simple", node.getLeft().getStart());
+		predicado(esTipoSimple(node.getLeft()), "[ERROR] Asignacion: El valor de la izquierda debe ser simple",
+				node.getLeft().getStart());
 
 		return null;
 	}
@@ -86,16 +82,15 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		predicado(mismoTipo(node.getLeft(), node.getRight()),
 				"[ERROR] Expresion comparativa: No coinciden los tipos de los operandos", node.getStart());
 
-		// Revisar
-		if (node.getOperador() == "&&")
-			predicado(node.getLeft().getTipo().getClass() == TipoEntero.class,
+		if (node.getOperador() == "&&") {
+			predicado(esTipoEntero(node.getLeft()),
 					"[ERROR] Expresion comparativa: El operador AND solo es aplicable a enteros", node.getStart());
+		}
 
-		// Revisar
-		if (node.getOperador() == "||")
-			predicado(node.getLeft().getTipo().getClass() == TipoEntero.class,
+		if (node.getOperador() == "||") {
+			predicado(esTipoEntero(node.getLeft()),
 					"[ERROR] Expresion comparativa: El operador OR solo es aplicable a enteros", node.getStart());
-
+		}
 		node.setTipo(new TipoEntero());
 		node.setModificable(false);
 
@@ -106,9 +101,8 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	public Object visit(Negacion node, Object param) {
 		super.visit(node, param);
 
-		// Revisar
-		predicado(node.getExpresion().getTipo().getClass() == TipoEntero.class,
-				"[ERROR] Negacion: El operador '!' solo es aplicable a enteros", node.getStart());
+		predicado(esTipoEntero(node.getExpresion()), "[ERROR] Negacion: El operador '!' solo es aplicable a enteros",
+				node.getStart());
 
 		node.setTipo(new TipoEntero());
 		node.setModificable(false);
@@ -122,8 +116,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		node.setTipo(node.getDefinicion().getTipo());
 		node.setModificable(true);
 
-		// Revisar
-		if (param != null && node.getTipo().getClass() == TipoIdent.class) {
+		if (param != null && esTipoIdent(node)) {
 			TipoIdent struct = (TipoIdent) node.getTipo();
 			DefEstructura defStruct = struct.getDefinicion();
 
@@ -132,7 +125,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 				if (dC.getNombre().equals(param)) { // Comprueba si existe el campo en la estructura
 					aparece = true;
 					Tipo tipo = dC.getTipo();
-					// Revisar
+
 					if (dC.getTipo().getClass() == TipoArray.class) { // Si es un campo de tipo array
 						node.setTipo(((TipoArray) tipo).getTipo()); // Asigna el tipo del tipo del array
 					} else
@@ -162,7 +155,6 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 	@Override
 	public Object visit(LiteralChar node, Object param) {
-		// Revisar
 		node.setTipo(new TipoChar());
 		node.setModificable(false);
 		return null;
@@ -177,18 +169,15 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	public Object visit(AccesoArray node, Object param) {
 		super.visit(node, param);
 
-		// Revisar
-		predicado(node.getPosicion().getTipo().getClass() == TipoEntero.class,
-				"[ERROR] Acceso Array: Solo se accede al array mediante un entero", node.getStart());
+		predicado(esTipoEntero(node.getPosicion()), "[ERROR] Acceso Array: Solo se accede al array mediante un entero",
+				node.getStart());
 
-		// Revisar
-		if (node.getPosicion().getTipo().getClass() == TipoEntero.class) {
-			// Revisar
-			predicado(node.getIdentificador().getTipo().getClass() == TipoArray.class,
+		if (esTipoEntero(node.getPosicion())) {
+			predicado(esTipoArray(node.getIdentificador()),
 					"[ERROR] Acceso Array: Solo se puede acceder al interior de variables si son arrays",
 					node.getStart());
-			// Revisar
-			if (node.getIdentificador().getTipo().getClass() == TipoArray.class) {
+
+			if (esTipoArray(node.getIdentificador())) {
 				node.setTipo(((TipoArray) node.getIdentificador().getTipo()).getTipo());
 				node.setModificable(true);
 			}
@@ -206,7 +195,6 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	@Override
 	public Object visit(DefReturn node, Object param) {
 		if (node.getTipo() != null) {
-			// Revisar
 			predicado(node.getTipo().getClass() != TipoIdent.class && node.getTipo().getClass() != TipoArray.class,
 					"[ERROR] Return: Solo se pueden retornar tipos simples", node.getStart());
 
@@ -215,44 +203,37 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	}
 
 	@Override
-	public Object visit(Cuerpo node, Object param) {
-		// Revisar
-		super.visit(node, param);
-		return null;
-	}
-
-	@Override
 	public Object visit(Return node, Object param) {
 		super.visit(node, param);
 		Tipo t = node.getFuncion().getRetorno().getTipo();
 
-		if (t != null && node.getDevolucion() != null)
-			// Revisar
+		if (t != null && node.getDevolucion() != null) {
 			predicado(node.getDevolucion().getTipo().getClass() == t.getClass(),
 					"[ERROR] Return: No coincide el tipo del return del cuerpo y el de la declaracion de la funcion",
 					node.getStart());
+		}
 
-		else if (t == null)
+		else if (t == null) {
 			predicado(node.getDevolucion() == null, "[ERROR] Return: La funcion no acepta valores de retorno",
 					node.getStart());
+		}
 
-		else if (node.getDevolucion() == null)
+		else if (node.getDevolucion() == null) {
 			predicado(t == null, "[ERROR] Return: La funcion necesita un valor de retorno", node.getStart());
-
+		}
 		return null;
 	}
 
 	@Override
 	public Object visit(Cast node, Object param) {
 		super.visit(node, param);
-		// Revisar
-		predicado(node.getTipo().getClass() != TipoIdent.class && node.getExpresion().getClass() != TipoIdent.class,
-				"[ERROR] Cast: Solo se puede hacer cast de tipos simples", node.getStart());
-		// Revisar
-		predicado(node.getExpresion().getTipo().getClass() != TipoIdent.class,
+
+		predicado(esTipoSimple(node), "[ERROR] Cast: Solo se puede hacer cast de tipos simples", node.getStart());
+
+		predicado(!esTipoIdent(node.getExpresion()),
 				"[ERROR] Cast: Solo se puede hacer cast a expresiones de tipos simples", node.getStart());
-		// Revisar
-		predicado(node.getTipo().getClass() != node.getExpresion().getTipo().getClass(),
+
+		predicado(!mismoTipo(node, node.getExpresion()),
 				"[ERROR] Cast: No se puede hacer cast de un tipo al mismo tipo", node.getStart());
 
 		return null;
@@ -261,12 +242,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	@Override
 	public Object visit(AccesoCampo node, Object param) {
 		super.visit(node, node.getCampo());
-		// Revisar
-		predicado(node.getExpresion().getTipo().getClass() == TipoIdent.class,
+		predicado(esTipoIdent(node.getExpresion()),
 				"[ERROR] Acceso Campo: Solo se puede acceder a campos de expresiones de tipo struct", node.getStart());
 
-		// Revisar
-		if (node.getExpresion().getTipo().getClass() == TipoIdent.class) {
+		if (esTipoIdent(node.getExpresion())) {
 			DefEstructura defStruct = ((TipoIdent) node.getExpresion().getTipo()).getDefinicion();
 			for (DefCampo dC : defStruct.getCampos()) {
 				if (dC.getNombre().equals(node.getCampo())) {
@@ -286,7 +265,6 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	public Object visit(DefVariable node, Object param) {
 		if (node.getAmbito().equals("Parametro")) {
 			super.visit(node, param);
-			// Revisar
 			predicado(node.getTipo().getClass() != TipoArray.class,
 					"[ERROR] Funcion: Solo se aceptan parametros de tipo simple", node.getStart());
 		}
@@ -296,9 +274,8 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	@Override
 	public Object visit(While node, Object param) {
 		super.visit(node, param);
-		// Revisar
-		predicado(node.getCondicion().getTipo().getClass() == TipoEntero.class,
-				"[ERROR] While: Solo se aceptan condiciones de tipo entero", node.getStart());
+		predicado(esTipoEntero(node.getCondicion()), "[ERROR] While: Solo se aceptan condiciones de tipo entero",
+				node.getStart());
 
 		return null;
 	}
@@ -306,9 +283,8 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	@Override
 	public Object visit(IfElse node, Object param) {
 		super.visit(node, param);
-		// Revisar
-		predicado(node.getCondicion().getTipo().getClass() == TipoEntero.class,
-				"[ERROR] If Else: Solo se aceptan condiciones de tipo entero", node.getStart());
+		predicado(esTipoEntero(node.getCondicion()), "[ERROR] If Else: Solo se aceptan condiciones de tipo entero",
+				node.getStart());
 
 		return null;
 	}
@@ -316,9 +292,9 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	@Override
 	public Object visit(Read node, Object param) {
 		super.visit(node, param);
-		// Revisar
-		predicado(node.getEntrada().getTipo().getClass() != TipoIdent.class,
-				"[ERROR] Read: Solo se aceptan expresiones de tipo simple", node.getStart());
+		predicado(esTipoIdent(node.getEntrada()), "[ERROR] Read: Solo se aceptan expresiones de tipo simple",
+				node.getStart());
+
 		predicado(node.getEntrada().isModificable(), "[ERROR] Read: Solo se aceptan expresiones modificables",
 				node.getStart());
 
@@ -331,10 +307,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		predicado(node.getSalida().getTipo() != null, "[ERROR] Print: Es necesario introducir algun valor",
 				node.getStart());
-		if (node.getSalida().getTipo() != null)
-			// Revisar
-			predicado(node.getSalida().getTipo().getClass() != TipoIdent.class,
-					"[ERROR] Print: Solo se aceptan expresiones de tipo simple", node.getStart());
+		if (node.getSalida().getTipo() != null) {
+			predicado(!esTipoIdent(node.getSalida()), "[ERROR] Print: Solo se aceptan expresiones de tipo simple",
+					node.getStart());
+		}
 
 		return null;
 	}
@@ -343,11 +319,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	public Object visit(PrintLN node, Object param) {
 		super.visit(node, param);
 
-		if (node.getSalida() != null)
-			// Revisar
-			predicado(node.getSalida().getTipo().getClass() != TipoIdent.class,
-					"[ERROR] Println: Solo se aceptan expresiones de tipo simple", node.getStart());
-
+		if (node.getSalida() != null) {
+			predicado(esTipoIdent(node.getSalida()), "[ERROR] Println: Solo se aceptan expresiones de tipo simple",
+					node.getStart());
+		}
 		return null;
 	}
 
@@ -357,10 +332,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		predicado(node.getSalida().getTipo() != null, "[ERROR] Printsp: Es necesario introducir algun valor",
 				node.getStart());
-		if (node.getSalida().getTipo() != null)
-			// Revisar
-			predicado(node.getSalida().getTipo().getClass() != TipoIdent.class,
-					"[ERROR] Printsp: Solo se aceptan expresiones de tipo simple", node.getStart());
+		if (node.getSalida().getTipo() != null) {
+			predicado(esTipoIdent(node.getSalida()), "[ERROR] Printsp: Solo se aceptan expresiones de tipo simple",
+					node.getStart());
+		}
 
 		return null;
 	}
@@ -381,7 +356,6 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		} else {
 			boolean coincidenTipos = true;
 			for (int i = 0; i < parametros.size(); i++) {
-				// Revisar
 				if (parametros.get(i).getTipo().getClass() != node.getArgumentos().get(i).getTipo().getClass())
 					coincidenTipos = false;
 			}
@@ -405,7 +379,6 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		} else {
 			boolean coincidenTipos = true;
 			for (int i = 0; i < parametros.size(); i++) {
-				// Revisar
 				if (parametros.get(i).getTipo().getClass() != node.getArgumentos().get(i).getTipo().getClass())
 					coincidenTipos = false;
 			}
