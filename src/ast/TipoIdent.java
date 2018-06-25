@@ -51,4 +51,14 @@ public class TipoIdent extends AbstractTipo {
 	public int getSize() {
 		return definicion.getSize();
 	}
+
+	@Override
+	public String getNombreMAPL() {
+		return definicion.getNombre();
+	}
+
+	@Override
+	public char getSufijo() {
+		return 0;
+	}
 }

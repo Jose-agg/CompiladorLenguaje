@@ -22,4 +22,14 @@ public class TipoEntero extends AbstractTipo {
 		return 2;
 	}
 
+	@Override
+	public String getNombreMAPL() {
+		return "int";
+	}
+
+	@Override
+	public char getSufijo() {
+		return 'i';
+	}
+
 }

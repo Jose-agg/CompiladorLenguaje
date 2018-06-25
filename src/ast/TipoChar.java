@@ -22,4 +22,14 @@ public class TipoChar extends AbstractTipo {
 		return 1;
 	}
 
+	@Override
+	public String getNombreMAPL() {
+		return "char";
+	}
+
+	@Override
+	public char getSufijo() {
+		return 'b';
+	}
+
 }

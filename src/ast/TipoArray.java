@@ -48,8 +48,20 @@ public class TipoArray extends AbstractTipo {
 		return v.visit(this, param);
 	}
 
+	// Extra
+
 	@Override
 	public int getSize() {
 		return tipo.getSize() * Integer.parseInt(dimension.getValor());
+	}
+
+	@Override
+	public String getNombreMAPL() {
+		return dimension.getValor() + " * " + tipo.getNombreMAPL();
+	}
+
+	@Override
+	public char getSufijo() {
+		return tipo.getSufijo();
 	}
 }

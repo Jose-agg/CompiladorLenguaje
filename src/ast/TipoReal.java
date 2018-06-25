@@ -22,4 +22,14 @@ public class TipoReal extends AbstractTipo {
 		return 4;
 	}
 
+	@Override
+	public String getNombreMAPL() {
+		return "float";
+	}
+
+	@Override
+	public char getSufijo() {
+		return 'f';
+	}
+
 }
