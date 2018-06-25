@@ -1,0 +1,120 @@
+// En los test de abajo, salvo un caso suuuper raro, tendria que salir sin errores.
+// SI ves que falla algo del sintactico: real vs float o ese estilo, cambialo en el test. 
+// Ya es que este test en el examen te lo mandarian crear a partir de codigo de C.
+
+struct Pareja { 
+  entero:int;
+  caracter:char;
+};
+
+var pareja:Pareja;
+
+struct Empleado { edad:int; };
+
+struct Empresa { 
+	empleados:[2]Empleado;
+};
+
+
+var acme:[2]Empresa;
+
+
+var fibonacci:[8][3]int;
+
+//-------------------------------
+
+p() {}
+
+
+f(paramReal:real, paramInt:int):int {
+  var localReal:real;
+  var digito:char;
+  var resultado:int;
+ 
+  localReal = paramReal * 10.0;
+  digito = '0';
+  if (paramInt < 256) {
+    digito = cast<char>(paramInt);
+    resultado = cast<int>(digito);
+  }
+  else {
+    resultado = cast<int>(localReal);
+  }
+  return resultado;
+}
+
+
+inicializa() {
+  var i:int;
+ 
+  fibonacci[0][0] = 0;
+  fibonacci[0][1] = 1;
+  fibonacci[0][2] = 1;
+  i = 1;
+  while(i < 8) {
+    fibonacci[i][0] = fibonacci[i - 1][1];
+    fibonacci[i][1] = fibonacci[i - 1][2];
+    fibonacci[i][2] = fibonacci[i][0] + fibonacci[i][1];
+    i = i + 1;
+  }
+}
+
+//-------------------------------
+
+main(){
+  var i:int;
+  var j:int;
+
+  p();
+  
+  i = 0;
+  pareja.caracter = '0';
+  pareja.entero = cast<int>('0');
+
+  print f(cast<real>(i), cast<int>(pareja.caracter));  // Sale 48 (código ASCII de '0')
+  print '\n';
+  f(1.3, 2);
+ 
+  inicializa(); 
+  i = 0;
+  while (i < 8) { 	// Salen 8 primeros de Fibonacci (de 1 a 34)
+    print '(';
+    print i + 1;
+    print ')';
+    print ' ';
+    print fibonacci[i][0];
+    print '+';
+    print fibonacci[i][1];
+    print '=';
+    print fibonacci[i][2];
+    print '\n';
+    i = i + 1;
+  }
+
+  acme[1].empleados[1].edad = 56;
+  print acme[1].empleados[1].edad;	// Sale 56
+  print '\n';
+
+  i = 0;
+  while (i < 2) {
+    j = 0;
+    while (j < 2) {
+      acme[i].empleados[j].edad = i + j;
+      j = j + 1;
+    }
+    i= i + 1;
+  }
+
+
+  i = 0;
+  while (i < 2) {
+    j = 0;
+    while (j < 2) {	      // Sale: 0 1 1 2
+      print acme[i].empleados[j].edad;
+      print ' ';
+      j = j + 1;
+    }
+    i = i + 1;
+  }
+}
+
