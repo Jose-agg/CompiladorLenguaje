@@ -2,44 +2,42 @@ CATEGORIES
 definicion, tipo, sentencia, expresion
 
 NODES
-programa -> definiciones:definicion*;
+programa -> definiciones:definicion* ;
 
-defVariable:definicion -> nombre:String tipo:tipo ambito:String;
-defCampo -> nombre:String tipo:tipo;
+defVariable:definicion -> nombre:string tipo:tipo ambito:string ;
+defFuncion:definicion -> nombre:string parametros:defVariable* retorno:defReturn cuerpo:cuerpo ;
+defEstructura:definicion -> nombre:string campos:defCampo* ;
+
+defCampo -> nombre:string tipo:tipo ;
+
+defReturn -> tipo: tipo ;
+cuerpo -> definicionesVariables:defVariable* sentencias:sentencia* ;
 
 tipoEntero:tipo -> ;
 tipoReal:tipo -> ;
 tipoChar:tipo -> ;
-
 tipoIdent:tipo -> nombre:string;
-tipoArray:tipo -> longitud:literalEntero tipo:tipo;
+tipoArray:tipo -> dimension:literalEntero tipo:tipo ;
 
-defEstructura:definicion -> nombre:string definicionCampos:defCampo*;
+asignacion:sentencia -> left:expresion right:expresion ;
+print:sentencia -> salida:expresion ;
+printLN:sentencia -> salida:expresion ;
+printSP:sentencia -> salida:expresion ;
+read:sentencia -> entrada:expresion ;
+ifElse:sentencia -> condicion:expresion correcto:sentencia* incorrecto:sentencia* ;
+while:sentencia -> condicion:expresion correcto:sentencia* ;
+return:sentencia -> devolucion:expresion ;
+invocacionProcedimiento:sentencia -> nombre:string argumentos:expresion* ;
 
-defFuncion:definicion -> nombre:string parametros:defVariable* retorno:tipoReturn definicionVariables:defVariable* sentencias:sentencia*;
-
-tipoReturn -> tipo:tipo;
-
-asignacion:sentencia -> left:expresion right:expresion;
-escrituraNormal:sentencia -> expresion:expresion;
-escrituraSP:sentencia -> expresion:expresion;
-escrituraLN:sentencia -> expresion:expresion;
-lectura:sentencia -> expresion:expresion;
-condicional:sentencia -> condicion:expresion cumple:sentencia* noCumple:sentencia*;
-iterativa:sentencia -> condicion:expresion accion:sentencia*;
-return:sentencia -> expresion:expresion;
-returnVoid:sentencia -> ;
-invocacionProcedimiento:sentencia -> nombre:string parametros:expresion*;
-
-literalEntero:expresion -> valor:string;
-literalReal:expresion -> valor:string;
-literalChar:expresion -> valor:string;
-variable:expresion -> nombre:string;
-expresionAritmetica:expresion -> left:expresion operador:string right:expresion;
-expresionComparacion:expresion -> left:expresion operador:string right:expresion;
-expresionLogica:expresion -> left:expresion operador:string right:expresion;
-negacion:expresion -> expresion:expresion;
-invocacionFuncion:expresion -> nombre:string parametros:expresion*;
-accesoArray:expresion -> nombre:expresion posicion:expresion;
-accesoCampo:expresion -> precedente:expresion campo:string;
-cast:expresion -> tipo:tipo valor:expresion*;
+literalEntero:expresion -> valor:string ;
+literalReal:expresion -> valor:string ;
+literalChar:expresion -> valor:string ;
+variable:expresion -> nombre:string ;
+expresionAritmetica:expresion -> left:expresion operador:string right:expresion ;
+expresionComparacion:expresion -> left:expresion operador:string right:expresion ;
+negacion:expresion -> expresion:expresion ;
+invocacionFuncion:expresion -> nombre:string argumentos:expresion* ;
+cast:expresion -> nuevoTipo:tipo expresion:expresion ;
+accesoArray:expresion -> identificador:expresion posicion:expresion ;
+accesoCampo:expresion -> expresion:expresion campo:string ;
+menosUnario:expresion -> expresion:expresion ;
