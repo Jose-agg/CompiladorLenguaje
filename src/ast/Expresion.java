@@ -6,5 +6,7 @@ package ast;
 
 public interface Expresion extends AST {
 
-}
+	public boolean isModificable();
 
+	public Tipo getTipo();
+}

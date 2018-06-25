@@ -37,7 +37,7 @@ expresionAritmetica:expresion -> left:expresion operador:string right:expresion 
 expresionComparacion:expresion -> left:expresion operador:string right:expresion ;
 negacion:expresion -> expresion:expresion ;
 invocacionFuncion:expresion -> nombre:string argumentos:expresion* ;
-cast:expresion -> nuevoTipo:tipo expresion:expresion ;
+cast:expresion -> tipo expresion:expresion ;
 accesoArray:expresion -> identificador:expresion posicion:expresion ;
 accesoCampo:expresion -> expresion:expresion campo:string ;
 menosUnario:expresion -> expresion:expresion ;

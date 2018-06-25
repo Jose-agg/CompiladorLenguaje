@@ -6,29 +6,29 @@ package ast;
 
 import visitor.*;
 
-//	cast:expresion -> nuevoTipo:tipo  expresion:expresion
+//	cast:expresion -> tipo:tipo  expresion:expresion
 
 public class Cast extends AbstractExpresion {
 
-	public Cast(Tipo nuevoTipo, Expresion expresion) {
-		this.nuevoTipo = nuevoTipo;
+	public Cast(Tipo tipo, Expresion expresion) {
+		this.tipo = tipo;
 		this.expresion = expresion;
 
-		searchForPositions(nuevoTipo, expresion);	// Obtener linea/columna a partir de los hijos
+		searchForPositions(tipo, expresion);	// Obtener linea/columna a partir de los hijos
 	}
 
-	public Cast(Object nuevoTipo, Object expresion) {
-		this.nuevoTipo = (Tipo) nuevoTipo;
+	public Cast(Object tipo, Object expresion) {
+		this.tipo = (Tipo) tipo;
 		this.expresion = (Expresion) expresion;
 
-		searchForPositions(nuevoTipo, expresion);	// Obtener linea/columna a partir de los hijos
+		searchForPositions(tipo, expresion);	// Obtener linea/columna a partir de los hijos
 	}
 
-	public Tipo getNuevoTipo() {
-		return nuevoTipo;
+	public Tipo getTipo() {
+		return tipo;
 	}
-	public void setNuevoTipo(Tipo nuevoTipo) {
-		this.nuevoTipo = nuevoTipo;
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
 	}
 
 	public Expresion getExpresion() {
@@ -43,7 +43,7 @@ public class Cast extends AbstractExpresion {
 		return v.visit(this, param);
 	}
 
-	private Tipo nuevoTipo;
+	private Tipo tipo;
 	private Expresion expresion;
 }
 

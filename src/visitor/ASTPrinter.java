@@ -394,13 +394,13 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
-	//	class Cast { Tipo nuevoTipo;  Expresion expresion; }
+	//	class Cast { Tipo tipo;  Expresion expresion; }
 	public Object visit(Cast node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "Cast", node, false);
 
-		visit(indent + 1, "nuevoTipo", "Tipo",node.getNuevoTipo());
+		visit(indent + 1, "tipo", "Tipo",node.getTipo());
 		visit(indent + 1, "expresion", "Expresion",node.getExpresion());
 		return null;
 	}

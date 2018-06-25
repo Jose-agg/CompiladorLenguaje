@@ -46,4 +46,9 @@ public class Variable extends AbstractExpresion {
 	public DefVariable getDefinicion() {
 		return definicion;
 	}
+
+	@Override
+	public Tipo getTipo() {
+		return definicion.getTipo();
+	}
 }

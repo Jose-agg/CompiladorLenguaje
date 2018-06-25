@@ -211,10 +211,10 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
-	//	class Cast { Tipo nuevoTipo;  Expresion expresion; }
+	//	class Cast { Tipo tipo;  Expresion expresion; }
 	public Object visit(Cast node, Object param) {
-		if (node.getNuevoTipo() != null)
-			node.getNuevoTipo().accept(this, param);
+		if (node.getTipo() != null)
+			node.getTipo().accept(this, param);
 		if (node.getExpresion() != null)
 			node.getExpresion().accept(this, param);
 		return null;

@@ -17,9 +17,7 @@ import main.GestorErrores;
 import visitor.DefaultVisitor;
 
 /**
- * 
  * @author José Antonio García García
- * 
  */
 public class Identificacion extends DefaultVisitor {
 
