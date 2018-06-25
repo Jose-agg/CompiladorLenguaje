@@ -1,0 +1,96 @@
+' Instrucciones:
+' - F7 para avanzar.
+' - F6 para retroceder.
+' - Pararse para leer cada explicación.
+
+' Inferencia en Funciones.
+' - Ejecutar hasta "0012 enter 6" 
+'   (doble-click sobre la instrucción).
+push 10
+push 82
+push 94
+call sumaIVA
+add
+
+' 4) Warnings. La información obtenida
+' mediante inferencia se utiliza para
+' detectar acciones sospechosas en 
+' tiempo de ejecución.
+'
+' - Ejemplo 4.1: Se va a pasar un real a
+' una función que espera un int.
+pushf 4.5
+call funcion2
+jmp fin
+
+' El call ha producido un Warning: el
+' tamaño del parámetro es incorrecto.
+funcion2:
+nop
+
+' - Ejemplo 4.2: Se van a dejar valores
+' sin retirar en la pila. El 'stack frame'
+' (BP anterior y la dirección de retorno)
+' no estarán donde espera el ret y en
+' su lugar va a coger valores basura
+' de la pila.
+push 26
+push 1024
+ret 0, 0, 2
+
+'------------------------------------
+' 1) Inferencia de Parámetros.
+' Se utilizan los accesos a memoria
+' para inferir dónde están los
+' parámetros y las variables locales
+' de las funciones.
+' En este momento, se ha inferido que
+' el 82 y el 94 (pero no el 10) son
+' los parámetros de la función (en
+' violeta de 1018 a 1021). Se muestra
+' también sus direcciones relativas
+' (Param2 = BP+4 y Param1 = BP+6).
+' 
+sumaIVA:
+enter 6
+ 
+push bp
+push 4
+add
+
+' 2) Conversión a direcciones relativas.
+' En la cima de la pila hay una
+' dirección absoluta. Detrás se
+' indica que se corresponde con la
+' dirección relativa "BP+4" e indica
+' además que corresponde a "Param2".
+load
+out
+
+push bp
+push -5
+add
+push 256
+store
+
+' 3) Inferencia de variables locales.
+' Se resaltan en negrita los valores
+' modificados por la última instrucción.
+' En este caso, se ha inferido una de
+' las variables locales (una int situada
+' en 1009) y se muestra su dirección
+' relativa (BP-5).
+nop
+
+push 100
+ret 2, 6, 4
+
+fin:
+
+' Se producen 3 warnings al detectar
+' que el ret no ha cogido un stack
+' frame válido.
+nop
+
+halt	' Fin del ejercicio
+

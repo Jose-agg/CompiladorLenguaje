@@ -4,15 +4,14 @@ import ast.AST;
 import main.GestorErrores;
 
 /**
- * Esta clase coordina las dos fases del An√°lisis Sem√°ntico:
- * 
- * 1- Fase de Identificaci√≥n
+ * Esta clase coordina las dos fases del An·lisis Sem·ntico:
+ * 1- Fase de IdentificaciÛn
  * 2- Fase de Inferencia
  * 
  * No es necesario modificar esta clase. En su lugar hay que modificar las clases
- * que son llamadas desde aqu√≠: "Identificacion.java" y "ComprobacionDeTipos.java"
+ * que son llamadas desde aquÌ: "Identificacion.java" y "ComprobacionDeTipos.java"
  * 
- * @author Jos√© Antonio Garc√≠a Garc√≠a
+ * @author JosÈ Antonio GarcÌa GarcÌa
  *
  */
 public class AnalisisSemantico {

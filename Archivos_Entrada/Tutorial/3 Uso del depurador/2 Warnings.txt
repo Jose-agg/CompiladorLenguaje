@@ -1,0 +1,137 @@
+' Instrucciones:
+' - F7 para avanzar.
+' - F6 para retroceder.
+' - Pararse para leer cada explicación.
+
+' 1) Errores vs Warnings.
+' GVM/TextVM se detendrán ante 
+' situaciones que impidan continuar
+' con la ejecución (errores):
+' - Accessos a memoria fuera de rango.
+' - División por cero.
+' - Pila llena o vacía.
+' - IP con valor fuera de rango.
+'
+' Cuando un programa tiene fallos,
+' estos son más difíciles de detectar
+' si, en vez de pararse por algún error
+' de los anteriores, continúa la ejecución
+' sin que se advierta que algo se ha
+' hecho mal (escribir en la dirección
+' incorrecta, tipo no adecuado, etc).
+'
+' Para detectar estas situaciones, el
+' depurador recoge información durante
+' la ejecución que le permite detectar
+' situaciones anómalas (warnings) que
+' suelen indicar que el programa tiene
+' fallos.
+nop
+
+
+' Ejemplo 1
+pushb 12
+pushb 13
+push 4
+add
+' Al ejecutar el "add" anterior ha aparecido
+' un Warning en el panel "Incidencias
+' de Ejecución" (panel inferior derecho).
+' Pulsar F6 para volver al add y comprobar
+' que no había en la pila dos enteros sino
+' un entero y dos char.
+pop
+
+
+' Ejemplo 2
+pushf 34.78
+pop
+' Warning: el pop anterior deja parte del
+' valor float en la pila (saca 2 de sus 4 bytes).
+pop  ' Se produce warning al sacar basura
+
+
+' Ejemplo 3
+pusha 32
+pusha 44
+add
+' Warning: no es válido sumar dos direcciones.
+pop
+
+
+' Ejemplo 4
+pusha 0
+load
+' Warning: lectura de una variable sin
+' inicializar.
+pop   
+
+
+' Ejemplo 5 
+pusha 0
+pushb 27
+storeb
+' Warning: acceso incorrecto a una variable.
+' En el ejemplo 4 se accedió a la dirección
+' 0 para leer un entero. Por tanto se infirió
+' que dicha posición correspondía a una
+' variable int.
+' Ahora se está escribiendo un byte. Por tanto,
+' uno de los dos accesos debe estar mal.
+'
+' Pulsando el icono "?" de la variable
+' "Var0" aparece la opción de mostrar (o
+' retroceder) tanto a la instrucción que 
+' realizó el primer acceso como a la que 
+' hizo el último, y averiguar así cuál
+' está mal.
+nop
+
+
+' Ejemplo 6
+push 4
+push 5
+pusha 1021
+push 0
+store
+' Warning: acceso a memoria que no
+' se corresponde con una variable.
+' De hecho se producen 2 warnings, ya
+' que se han corrompido dos valores de
+' la pila.
+' Pulsando sobre el icono de ayuda en la dirección
+' 1020 o en la 1022 se podría saber quién
+' introdujo la basura y qué había antes.
+nop
+
+
+' 2) Vista de Incidencias (warnings).
+' No es necesario ir instrucción a 
+' instrucción para comprobar si hay
+' fallos en un programa. Lo normal será
+' ejecutar todo el programa (F5) y 
+' observar el panel de incidencias.
+' Si aparece alguna, se tienen dos
+' opciones:
+' - Mostrar la instrucción que causó
+'   la incidencia (click sobre ella).
+' - Volver al momento de la incidencia
+'   para ver qué había en la pila
+'   (doble-click).
+'
+' Pruebe a hacer "click" sobre algunas
+' incidencias para saber qué instrucciones
+' las produjo.
+' Pruebe también a hacer "doble+click" sobre 
+' alguna incidencia para retroceder la
+' ejecución al momento en el que se
+' produjo y poder observar así la pila y
+' comprobar cómo efectivamente habría algún
+' valor incorrecto sobre el que no se debería
+' haber operado.
+nop
+
+
+' Warning: se han dejado valores sin usar 
+' en la pila.
+halt	' Fin del ejercicio

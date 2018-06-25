@@ -1,0 +1,21 @@
+int[3] vectorGlobal;
+
+void asigna(int[3] vectorParam) {
+	int[3] vectorLocal;
+
+	vectorGlobal[1] = 79;
+
+	vectorLocal[1] = 79;
+
+	vectorParam[1] = 79;
+}
+
+
+void main() {
+	int[3] meses;
+
+	// Paso por referencia de un array
+	asigna(meses)
+
+	print meses[1];
+}

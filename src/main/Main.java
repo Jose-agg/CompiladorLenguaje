@@ -19,30 +19,31 @@ import visitor.ASTPrinter;
  * 
  * No es necesario modificar este fichero. En su lugar hay que modificar:
  * 
- * - Para An√°lisis Sint√°ctico: 
+ * - Para An·lisis Sint·ctico: 
  * 		'sintactico/sintac.y'
  * 		'sintactico/lexico.l'
  * 
- * - Para An√°lisis Sem√°ntico: 
+ * - Para An·lisis Sem·ntico: 
  * 		'semantico/Identificacion.java'
  * 		'semantico/ComprobacionDeTipos.java'
  * 
- * - Para Generaci√≥n de C√≥digo: 
+ * - Para GeneraciÛn de CÛdigo: 
  * 		'generacionDeCodigo/GestionDeMemoria.java'
  * 		'generacionDeCodigo/SeleccionDeInstrucciones.java'
  *
- * @author Jos√© Antonio Garc√≠a Garc√≠a
+ * @author JosÈ Antonio GarcÌa GarcÌa
  * 
  */
 public class Main {
-	public static final String programa = "Archivos_Entrada/Iniciales/ejemplo.txt"; // Entrada a usar durante el desarrollo
+
+	public static final String programa = "Archivos_Entrada/Test_Final.txt"; // Entrada a usar durante el desarrollo
 	public static String fechaEjecucion;
 
 	public static void main(String[] args) throws Exception {
 		GestorErrores gestor = new GestorErrores();
 		fechaEjecucion = getNombreArchivoSalida();
 
-		AST raiz = compile(programa, gestor); // Poner args[0] en vez de "programa" en la versi√≥n final
+		AST raiz = compile(programa, gestor); // Poner args[0] en vez de "programa" en la versiÛn final
 		if (!gestor.hayErrores())
 			System.out.println("El programa se ha compilado correctamente.");
 
@@ -54,22 +55,22 @@ public class Main {
 	 */
 	public static AST compile(String sourceName, GestorErrores gestor) throws Exception {
 
-		// 1. Fases de An√°lisis L√©xico y Sint√°ctico
+		// 1. Fases de An·lisis LÈico y Sint·ctico
 		Yylex lexico = new Yylex(new FileReader(sourceName), gestor);
 		Parser sintactico = new Parser(lexico, gestor, false);
 		sintactico.parse();
 
 		AST raiz = sintactico.getAST();
-		if (raiz == null) // Hay errores o el AST no se ha implementado a√∫n
+		if (raiz == null) // Hay errores o el AST no se ha implementado a˙n
 			return null;
 
-		// 2. Fase de An√°lisis Sem√°ntico
+		// 2. Fase de An·lisis Sem·ntico
 		AnalisisSemantico semantico = new AnalisisSemantico(gestor);
 		semantico.analiza(raiz);
 		if (gestor.hayErrores())
 			return raiz;
 
-		// 3. Fase de Generaci√≥n de C√≥digo
+		// 3. Fase de GeneraciÛn de CÛdigo
 		File sourceFile = new File(sourceName);
 		String salida = "Archivos_Salida/salida - " + fechaEjecucion + ".txt";
 		Writer out = new FileWriter(new File(salida));

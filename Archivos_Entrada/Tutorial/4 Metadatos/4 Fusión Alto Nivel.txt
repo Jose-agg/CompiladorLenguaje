@@ -1,0 +1,16 @@
+#source "Fusión Alto Nivel.Source.txt"
+
+#line 6
+' Fijarse dónde se imprimen en GVM las dos
+' siguientes instrucciones
+push 1
+out
+
+#line 8
+' Fijarse dónde se imprimen en GVM las 
+' siguientes instrucciones
+push 2
+push 3
+add
+out
+halt

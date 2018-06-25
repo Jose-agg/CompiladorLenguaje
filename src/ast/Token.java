@@ -1,20 +1,20 @@
 package ast;
 
 /**
- * @author Raúl Izquierdo
+ * @generated VGen 1.3.3
  */
 
-public class Token {
+public class Token implements Traceable {
 
-	public Token(int token, String lexeme, int line, int column) {
-		this.token = token;
+	public Token(int tokenType, String lexeme, int line, int column) {
+		this.tokenType = tokenType;
 		this.lexeme = lexeme;
 		this.line = line;
 		this.column = column;
 	}
 
 	public int getToken() {
-		return token;
+		return tokenType;
 	}
 
 	public String getLexeme() {
@@ -38,7 +38,7 @@ public class Token {
 		return "Token[" + getStart() + ", " + getEnd() + "] = " + lexeme;
 	}
 
-	private int token;
+	private int tokenType;
 	private String lexeme;
 	private int line;
 	private int column;

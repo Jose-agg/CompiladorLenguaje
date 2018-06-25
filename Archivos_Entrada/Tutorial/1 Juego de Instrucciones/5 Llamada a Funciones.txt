@@ -1,0 +1,31 @@
+#source "Llamada a Funciones.Source.txt"
+
+call main
+halt
+
+america:
+#func america
+#line 4
+push 1492
+out
+#line 5
+ret
+
+
+#func main
+main:
+
+
+#line 10
+pushb 42
+outb
+
+#line 12
+call america
+
+#line 14
+pushb 42
+outb
+
+#line 15
+ret

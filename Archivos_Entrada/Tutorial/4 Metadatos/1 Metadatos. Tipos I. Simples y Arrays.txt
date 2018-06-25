@@ -1,0 +1,67 @@
+' Instrucciones:
+' - F7 para avanzar.
+' - F6 para retroceder.
+' - Pararse para leer cada explicación.
+
+' 1) Metadatos (parte I). 
+' Tipos simples y Arrays.
+
+' Con la inferencia de variables (ver
+' "1 Info sobre valores.txt") había que
+' esperar a los accesos a memoria para
+' que las variables se descubrieran, se
+' dibujaran y se validaran sus accesos.
+'
+' Con #global se puede indicar a GVM las
+' variables que hay en el programa para que
+' se dibujen ya a la carga del mismo y se 
+' compruebe la validez de todos sus accesos.
+
+#global edad:int
+#global inicial:char
+#global vector:3 * int	' Array de 3 int
+
+' Nótese que las variables ya están
+' dibujadas en la Memoria Estática (panel
+' central) y con los mismos nombres que en
+' el programa de alto nivel (en vez de usar
+' un nombre genérico "Var<n>").
+nop
+
+' Sintaxis:
+' #global <nombre>:<tipo>
+
+' Tipos (parte I):
+'   int
+'   real/float     (sinónimos)
+'   byte/char      (sinónimos)
+'   <n> * <tipo>   (array de n elementos)
+'
+nop
+
+pusha 3
+' Otra ventaja de describir las
+' variables con #global es que en la pila
+' se va indicando a qué variable
+' apunta una dirección.
+' Ahora mismo se puede ver en la
+' pila que el 3 es la dirección
+' de vector[0].
+'
+nop
+
+push 2
+add
+' Ahora es la dirección de vector[1].
+nop
+
+push 1
+add
+' Y además se indica si se tiene en
+' la pila una dirección inválida por no
+' coincidir con el inicio de ninguna
+' variable.
+nop
+pop
+
+halt 	' Fin del ejercicio

@@ -1,10 +1,12 @@
+/**
+ * @generated VGen 1.3.3
+ */
+
 package ast;
 
-import visitor.Visitor;
+import visitor.*;
 
-/*
- * Esta clase se completará en la fase de Análisis Sintáctico
- */
-public interface AST {
+public interface AST extends Traceable {
 	public Object accept(Visitor visitor, Object param);
 }
+

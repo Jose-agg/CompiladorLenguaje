@@ -1,0 +1,77 @@
+#source "Paso por Referencia. Structs.Source.txt"
+
+#type Persona: {
+	edad:int;
+	sueldo:float;
+}
+
+#data personaGlobal:Persona
+
+call main
+halt
+
+#func inicia
+#param personaParam:address
+#ret void
+#local personaLocal:Persona
+
+inicia:
+#line 9
+enter 6
+
+#line 11
+pusha 0
+push 2
+add
+pushf 1000.5
+storef
+
+#line 13
+push bp
+push -6
+add
+push 2
+add
+pushf 1000.5
+storef
+
+#line 15
+push bp
+push 4
+add
+load
+push 2
+add
+pushf 1000.5
+storef
+
+#line 16
+ret 0, 6, 2
+
+
+
+#func main
+#ret void
+#local juan:Persona
+main:
+
+#line 19
+enter 6
+
+#line 22
+push bp
+push -6
+add
+call inicia
+
+#line 24
+push bp
+push -6
+add
+push 2
+add
+loadf
+outf
+
+#line 25
+ret 0,6,0

@@ -1,0 +1,52 @@
+#source "Locales y Parametros.Source.txt"
+
+#global a:int
+#global b:real
+#global c:byte
+
+call main
+halt
+
+#func ejemplo
+#param par1:float
+#param par2:int
+#local local1:float
+#local local2:float
+
+ejemplo:
+#line 8
+enter 8
+
+#line 10
+pusha 2
+pushf 3.4
+Storef
+
+#line 11 
+pusha bp
+push 6
+add
+pushf 3.4
+Storef
+
+#line 12
+pusha bp
+push -8
+add
+pushf 3.4
+Storef
+
+
+#line 13
+ret 0, 8, 6
+
+#func main 
+main:
+
+#line 16
+pushf 1.5
+push 27
+call ejemplo
+
+#line 17
+ret

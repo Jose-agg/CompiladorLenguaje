@@ -1,0 +1,14 @@
+
+char b;
+int i;
+int v[10];
+
+void main() 
+{
+    v[7] = 100;
+
+    print v[7];
+
+    i = 2;
+    print v[i + 5];
+}

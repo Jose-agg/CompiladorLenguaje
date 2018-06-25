@@ -1,0 +1,8 @@
+
+void america {
+	return 1492;
+}
+
+void main() {
+	print 2010 - america();
+}

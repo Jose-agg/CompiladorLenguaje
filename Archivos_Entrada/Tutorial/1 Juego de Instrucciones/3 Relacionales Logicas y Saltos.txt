@@ -1,0 +1,67 @@
+' Instrucciones:
+' - F7 para ejecutar una
+'   instrucción.
+' - F6 para retroceder.
+
+'-----------------------------------------
+' 1. Operadores Relacionales
+' Devuelven: 0 = falso / 1 = cierto
+
+push 5
+push 4
+lt	'Less Than (menor que)
+
+pushf 5.5
+pushf 4.4
+gtf	'Greater Than (mayor que)
+
+push 5
+push 4
+eq	'Equal (iguales)
+
+pushf 5
+pushf 4
+nef	'Not Equal (distintos)
+
+pop
+pop
+pop
+pop
+
+
+'-----------------------------------------
+' 2. Operadores Lógicos
+
+push 2
+push 0
+and	'Mete 1 si ambos son ciertos
+
+push 2
+push 0
+or	'Mete 1 si alguno es cierto
+
+push 4
+not	' El 4 (cierto) se hace 0 (falso)
+not	' El 0 (falso) se hace 1 (cierto)
+
+pop
+pop
+pop
+
+
+'-----------------------------------------
+' 3. Saltos
+
+push 2
+
+inicio:
+dup		'Duplicar valor de la cima
+jz fin		'Jump Zero (salta si es 0)
+push 1
+sub
+jmp inicio	'Jump (salta siempre) 
+
+fin:
+jnz inicio	'Jump No Zero (salta si no es 0)
+
+halt

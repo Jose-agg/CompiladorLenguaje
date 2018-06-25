@@ -1,0 +1,81 @@
+#source "Paso por Referencia. Arrays.Source.txt"
+
+call main
+halt
+
+#data vectorGlobal: 3 * int
+
+#func asigna
+#param vectorParam:address
+#ret void
+#local vectorLocal: 3* int
+
+asigna:
+
+#line 4
+enter 6
+
+#line 6
+pusha 0
+push 1
+push 2
+mul
+add
+push 79
+store
+
+#line 8
+push bp
+push -6
+add
+push 1
+push 2
+mul
+add
+push 79
+store
+
+#line 10
+push bp
+push 4
+add
+load
+push 1
+push 2
+mul
+add
+push 79
+store
+
+#line 11
+ret 0, 6, 2
+
+
+#func main
+#ret void
+#local meses:3*int
+main:
+
+#line 15
+enter 6
+
+#line 18
+push bp
+push -6
+add
+call asigna
+
+#line 20
+push bp
+push -6
+add
+push 1
+push 2
+mul
+add
+load
+out
+
+#line 21
+ret 0, 6, 0
+

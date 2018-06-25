@@ -1,0 +1,44 @@
+' Instrucciones:
+' - F7 para ejecutar una
+'   instrucción.
+' - F6 para retroceder.
+
+
+'-----------------------------------------
+' Instrucciones de Movimiento de bytes
+
+' 1) Mover de la pila a la memoria
+' (asignar valor a una variable)
+
+pusha 0	'Dirección
+push 9999	'Valor
+store		'Mover 2 bytes a memoria
+
+pusha 2	' Dirección		
+pushf 1111
+storef		'Mover 4 bytes a memoria
+
+pusha 6	'Dirección
+pushb 97	'Valor 9999
+storeb		'Mover 1 byte a memoria
+
+' 2) Mover de la memoria a la pila
+' (obtener valor de una variable)
+
+pusha 0	'Dirección
+load		'Cargar 2 bytes
+
+pusha 2	' Dirección
+loadf		'Cargar 4 bytes
+
+pusha 6	' Dirección
+loadb		'Cargar 1 byte
+
+
+popb
+popf
+pop
+
+halt
+
+

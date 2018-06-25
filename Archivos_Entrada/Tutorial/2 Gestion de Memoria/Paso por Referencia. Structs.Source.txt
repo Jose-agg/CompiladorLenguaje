@@ -1,0 +1,25 @@
+struct Persona {
+	int edad;
+	float sueldo;
+};
+
+Persona personaGlobal;
+
+void inicia(Persona personaParam) {
+	Persona personaLocal; 
+
+	personaGlobal.sueldo = 1000.5;
+
+	personaLocal.sueldo = 1000.5;
+
+	personaParam.sueldo = 1000.5;
+}
+
+void main() {
+	Persona juan; 
+
+	// Paso por referencia de una estructura
+	inicia(juan);
+
+	print juan.sueldo;	// 1000.5
+}

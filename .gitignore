@@ -25,4 +25,8 @@ hs_err_pid*
 # Añadidos extra #
 .classpath
 .project
+.settings/*
+VGen/ast*
+VGen/metalenguajes*
+VGen/visitor*
 
