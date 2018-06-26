@@ -1,0 +1,56 @@
+main(){
+	var a:[5]int;
+	var b:[5]int;
+	var c:[2][5]float;
+	var i:int;
+	i=3;
+	/*
+	a = {i-2, i, i*5, 0-i, 9};
+	print a[0];
+	print ',';
+	print a[1];
+	print ',';
+	print a[2];
+	print ',';
+	print a[3];
+	print ',';
+	print a[4];
+	print ',';
+	*/
+	b = {'-', '-', '-', 'l', 'o'};
+	b = {104, 101, 108};
+	
+	// 104, 101, 108, 108, 111
+	print b[0];
+	print ',';
+	print b[1];
+	print ',';
+	print b[2];
+	print ',';
+	print b[3];
+	print ',';
+	print b[4];
+	print ',';
+	/*
+	b = {10.4, 101, 'l'};				// Error
+	b = {11.1, 10.8};					// Error
+	b = {'h', 'e', 'l', 'l', 111}; 		// Error
+	b = {1, 2, 3, 4, 5, 6, 7};			// Error
+	*/
+	c[0] = {'h', 'e', 'l', 'l', 'o'};
+	c[1] = {'w', 'o', 'r', 'l', 'd'};
+	
+	// 104.0, 101.0, 119.0, 111.0
+	print c[0][0];
+	print ',';
+	print c[0][1];
+	print ',';
+	print c[1][0];
+	print ',';
+	print c[1][1];
+	print ',';
+	/*
+	c = {'w', 'o', 'r', 'l', 'd'};			// Error
+	c[0][0] = {'w', 'o', 'r', 'l', 'd'};	// Error
+	*/
+}

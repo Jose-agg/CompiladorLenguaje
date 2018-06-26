@@ -61,4 +61,9 @@ public class TipoIdent extends AbstractTipo {
 	public char getSufijo() {
 		return 0;
 	}
+
+	@Override
+	public Tipo promociona(Tipo tipo) {
+		return null;
+	}
 }

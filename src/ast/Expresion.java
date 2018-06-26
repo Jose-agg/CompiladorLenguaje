@@ -9,4 +9,6 @@ public interface Expresion extends AST {
 	public boolean isModificable();
 
 	public Tipo getTipo();
+
+	public void setTipo(Tipo tipo);
 }

@@ -1,5 +1,6 @@
 package semantico;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ast.AccesoArray;
@@ -80,6 +81,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			Expresion local = node.getRight().get(0);
 			boolean mismoTipo = true;
 			boolean superaNumElementos = true;
+			boolean promocionValida = true;
+			Tipo tipoLeft = array.getTipo();
+			List<Expresion> casteos = new ArrayList<Expresion>();
+			boolean necesario = false;
 			for (Expresion e : node.getRight()) {
 				if (!mismoTipo(local, e)) {
 					mismoTipo = false;
@@ -90,12 +95,33 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 					superaNumElementos = false;
 					break;
 				}
+				Tipo t = tipoLeft.promociona(e.getTipo());
 
+				if (t == null) {
+					promocionValida = false;
+					break;
+				} else {
+					if (tipoLeft instanceof TipoReal && e.getTipo() instanceof TipoChar) {
+						casteos.add(new Cast(new TipoReal(), new Cast(new TipoEntero(), e)));
+						necesario = true;
+					}
+
+					if (tipoLeft instanceof TipoEntero && e.getTipo() instanceof TipoChar) {
+						casteos.add(new Cast(new TipoEntero(), e));
+						necesario = true;
+					}
+
+				}
 			}
 			predicado(mismoTipo, "[ERROR] Asignacion Multiple: No todas las expresiones son del mismo tipo",
 					node.getLeft().getStart());
 			predicado(superaNumElementos, "[ERROR] Asignacion Multiple: No se puede superar el tamaño del array",
 					node.getLeft().getStart());
+			predicado(promocionValida, "[ERROR] Asignacion Multiple: Se esta intentado hacer una promocion no valida",
+					node.getLeft().getStart());
+			if (promocionValida && necesario) {
+				node.setRight(casteos);
+			}
 		}
 
 		return null;

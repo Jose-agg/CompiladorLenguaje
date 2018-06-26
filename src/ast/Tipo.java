@@ -12,4 +12,5 @@ public interface Tipo extends AST {
 
 	public char getSufijo();
 
+	public Tipo promociona(Tipo tipo);
 }

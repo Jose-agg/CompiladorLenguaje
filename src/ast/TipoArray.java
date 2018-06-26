@@ -64,4 +64,9 @@ public class TipoArray extends AbstractTipo {
 	public char getSufijo() {
 		return tipo.getSufijo();
 	}
+
+	@Override
+	public Tipo promociona(Tipo tipo) {
+		return null;
+	}
 }
