@@ -437,6 +437,17 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
+	//	class AsignacionMultiple { Expresion left;  List<Expresion> right; }
+	public Object visit(AsignacionMultiple node, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "AsignacionMultiple", node, false);
+
+		visit(indent + 1, "left", "Expresion",node.getLeft());
+		visit(indent + 1, "right", "List<Expresion>",node.getRight());
+		return null;
+	}
+
 	// -----------------------------------------------------------------
 	// Métodos invocados desde los métodos visit -----------------------
 

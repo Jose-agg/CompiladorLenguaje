@@ -1,8 +1,3 @@
-// Jose, prueba que te funcione, aparte de esto que te dio Raul:
-// El operador NOT.
-// Los tipos de print: print, printls, prinln.
-// Porque no hay pruebas con eso
-
 // En los test de abajo, salvo un caso suuuper raro, tendria que salir sin errores.
 // SI ves que falla algo del sintactico: real vs float o ese estilo, cambialo en el test. 
 // Ya es que este test en el examen te lo mandarian crear a partir de codigo de C.
