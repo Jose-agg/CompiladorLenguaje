@@ -67,14 +67,14 @@ procedimiento(){
 }
 
 main(){	
-	procedimiento();				//procedimiento		// ampliacion
-	print telefonosAmigos[0];		// 111				// 444
-	print telefonosAmigos[1];		// 222				// 555
-	print telefonosAmigos[2];		// 333				// 666
+	procedimiento();
+	print telefonosAmigos[0];	// 111
+	print telefonosAmigos[1];	// 222
+	print telefonosAmigos[2];	// 333
 	print '\n';
-	print funcion(123.456);			// 123
-	print lunes.posicion;			// 1
-	print lunes.mnemonico;			// 'L'
+	print funcion(123.456);		// 123
+	print lunes.posicion;		// 1
+	print lunes.mnemonico;		// 'L'
 	print '\n';
 
 }
