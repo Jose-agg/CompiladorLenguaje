@@ -1,4 +1,4 @@
-#source "ExamenValido.txt"
+#source "codigo_ExamenEjercicio1.txt"
 call main
 halt
 #FUNC main
