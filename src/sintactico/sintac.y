@@ -115,6 +115,11 @@ invocacionFuncion: ID '(' argumentos ')'	{ $$ = new InvocacionFuncion($1,$3); }
 	;
 	
 asignacion: expresion '=' expresion ';'		{ $$ = new Asignacion($1,$3); }
+	| expresion '=' '{' expresiones '}'';'	{ $$ = new AsignacionMultiple($1,$4); }
+	;
+	
+expresiones: expresion						{ $$ = new ArrayList(); ((List)$$).add($1); }
+	| expresiones ',' expresion				{ $$ = $1; ((List)$1).add($3); }
 	;
 	
 escritura: PRINT expresion ';'				{ $$ = new Print($2); }

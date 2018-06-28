@@ -1,0 +1,382 @@
+#source "codigo_ExamenEjercicio2_Valido.txt"
+call main
+halt
+#FUNC main
+#RET VOID
+#LOCAL a:5 * int
+#LOCAL b:5 * int
+#LOCAL c:2 * 5 * float
+#LOCAL i:int
+main:
+enter 62
+#line 6
+pusha BP
+push -62
+add
+push 3
+storei
+#line 20
+pusha BP
+push -20
+add
+push 0
+push 2
+mul
+add
+pushb 45
+b2i
+storei
+pusha BP
+push -20
+add
+push 1
+push 2
+mul
+add
+pushb 45
+b2i
+storei
+pusha BP
+push -20
+add
+push 2
+push 2
+mul
+add
+pushb 45
+b2i
+storei
+pusha BP
+push -20
+add
+push 3
+push 2
+mul
+add
+pushb 108
+b2i
+storei
+pusha BP
+push -20
+add
+push 4
+push 2
+mul
+add
+pushb 111
+b2i
+storei
+#line 21
+pusha BP
+push -20
+add
+push 0
+push 2
+mul
+add
+push 104
+storei
+pusha BP
+push -20
+add
+push 1
+push 2
+mul
+add
+push 101
+storei
+pusha BP
+push -20
+add
+push 2
+push 2
+mul
+add
+push 108
+storei
+#line 24
+pusha BP
+push -20
+add
+push 0
+push 2
+mul
+add
+loadi
+outi
+#line 25
+pushb 44
+outb
+#line 26
+pusha BP
+push -20
+add
+push 1
+push 2
+mul
+add
+loadi
+outi
+#line 27
+pushb 44
+outb
+#line 28
+pusha BP
+push -20
+add
+push 2
+push 2
+mul
+add
+loadi
+outi
+#line 29
+pushb 44
+outb
+#line 30
+pusha BP
+push -20
+add
+push 3
+push 2
+mul
+add
+loadi
+outi
+#line 31
+pushb 44
+outb
+#line 32
+pusha BP
+push -20
+add
+push 4
+push 2
+mul
+add
+loadi
+outi
+#line 33
+pushb 44
+outb
+#line 40
+pusha BP
+push -60
+add
+push 0
+push 20
+mul
+add
+push 0
+push 4
+mul
+add
+pushb 104
+b2i
+i2f
+storef
+pusha BP
+push -60
+add
+push 0
+push 20
+mul
+add
+push 1
+push 4
+mul
+add
+pushb 101
+b2i
+i2f
+storef
+pusha BP
+push -60
+add
+push 0
+push 20
+mul
+add
+push 2
+push 4
+mul
+add
+pushb 108
+b2i
+i2f
+storef
+pusha BP
+push -60
+add
+push 0
+push 20
+mul
+add
+push 3
+push 4
+mul
+add
+pushb 108
+b2i
+i2f
+storef
+pusha BP
+push -60
+add
+push 0
+push 20
+mul
+add
+push 4
+push 4
+mul
+add
+pushb 111
+b2i
+i2f
+storef
+#line 41
+pusha BP
+push -60
+add
+push 1
+push 20
+mul
+add
+push 0
+push 4
+mul
+add
+pushb 119
+b2i
+i2f
+storef
+pusha BP
+push -60
+add
+push 1
+push 20
+mul
+add
+push 1
+push 4
+mul
+add
+pushb 111
+b2i
+i2f
+storef
+pusha BP
+push -60
+add
+push 1
+push 20
+mul
+add
+push 2
+push 4
+mul
+add
+pushb 114
+b2i
+i2f
+storef
+pusha BP
+push -60
+add
+push 1
+push 20
+mul
+add
+push 3
+push 4
+mul
+add
+pushb 108
+b2i
+i2f
+storef
+pusha BP
+push -60
+add
+push 1
+push 20
+mul
+add
+push 4
+push 4
+mul
+add
+pushb 100
+b2i
+i2f
+storef
+#line 44
+pusha BP
+push -60
+add
+push 0
+push 20
+mul
+add
+push 0
+push 4
+mul
+add
+loadf
+outf
+#line 45
+pushb 44
+outb
+#line 46
+pusha BP
+push -60
+add
+push 0
+push 20
+mul
+add
+push 1
+push 4
+mul
+add
+loadf
+outf
+#line 47
+pushb 44
+outb
+#line 48
+pusha BP
+push -60
+add
+push 1
+push 20
+mul
+add
+push 0
+push 4
+mul
+add
+loadf
+outf
+#line 49
+pushb 44
+outb
+#line 50
+pusha BP
+push -60
+add
+push 1
+push 20
+mul
+add
+push 1
+push 4
+mul
+add
+loadf
+outf
+#line 51
+pushb 44
+outb
+ret 0,62,0

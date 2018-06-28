@@ -32,4 +32,11 @@ public class TipoReal extends AbstractTipo {
 		return 'f';
 	}
 
+	@Override
+	public Tipo promociona(Tipo tipo) {
+		if (tipo instanceof TipoReal || tipo instanceof TipoEntero || tipo instanceof TipoChar) {
+			return this;
+		}
+		return null;
+	}
 }

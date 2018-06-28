@@ -1,10 +1,12 @@
 package semantico;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ast.AccesoArray;
 import ast.AccesoCampo;
 import ast.Asignacion;
+import ast.AsignacionMultiple;
 import ast.Cast;
 import ast.DefCampo;
 import ast.DefEstructura;
@@ -61,6 +63,87 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		predicado(esTipoSimple(node.getLeft()), "[ERROR] Asignacion: El valor de la izquierda debe ser simple",
 				node.getLeft().getStart());
+
+		return null;
+	}
+
+	//	class AsignacionMultiple { Expresion left;  List<Expresion> right; }
+	@Override
+	public Object visit(AsignacionMultiple node, Object param) {
+		super.visit(node, param);
+		predicado(esTipoArray(node.getLeft()),
+				"[ERROR] Asignacion Multiple: Solo se puede hacer asignacion multiple sobre arrays",
+				node.getLeft().getStart());
+
+		if (esTipoArray(node.getLeft())) {
+			TipoArray array = (TipoArray) node.getLeft().getTipo();
+			int numElementos = Integer.parseInt(array.getDimension().getValor());
+			Expresion local = node.getRight().get(0);
+			boolean mismoTipo = true;
+			boolean superaNumElementos = true;
+			boolean promocionValida = true;
+			Tipo tipoLeft = array.getTipo();
+			List<Expresion> casteos = new ArrayList<Expresion>();
+			boolean necesario = false;
+			for (Expresion e : node.getRight()) {
+				if (!mismoTipo(local, e)) {
+					mismoTipo = false;
+					break;
+				}
+				numElementos--;
+				if (numElementos < 0) {
+					superaNumElementos = false;
+					break;
+				}
+				Tipo t = tipoLeft.promociona(e.getTipo());
+
+				if (t == null) {
+					promocionValida = false;
+					break;
+				} else {
+					if (tipoLeft instanceof TipoReal && e.getTipo() instanceof TipoChar) {
+						casteos.add(new Cast(new TipoReal(), new Cast(new TipoEntero(), e)));
+						necesario = true;
+					}
+
+					if (tipoLeft instanceof TipoEntero && e.getTipo() instanceof TipoChar) {
+						casteos.add(new Cast(new TipoEntero(), e));
+						necesario = true;
+					}
+
+				}
+			}
+			predicado(mismoTipo, "[ERROR] Asignacion Multiple: No todas las expresiones son del mismo tipo",
+					node.getLeft().getStart());
+			predicado(superaNumElementos, "[ERROR] Asignacion Multiple: No se puede superar el tamaño del array",
+					node.getLeft().getStart());
+			predicado(promocionValida, "[ERROR] Asignacion Multiple: Se esta intentado hacer una promocion no valida",
+					node.getLeft().getStart());
+			if (promocionValida && necesario) {
+				node.setRight(casteos);
+			}
+		}
+
+		return null;
+	}
+
+	@Override
+	public Object visit(AccesoArray node, Object param) {
+		super.visit(node, param);
+
+		predicado(esTipoEntero(node.getPosicion()), "[ERROR] Acceso Array: Solo se accede al array mediante un entero",
+				node.getStart());
+
+		if (esTipoEntero(node.getPosicion())) {
+			predicado(esTipoArray(node.getIdentificador()),
+					"[ERROR] Acceso Array: Solo se puede acceder al interior de variables si son arrays",
+					node.getStart());
+
+			if (esTipoArray(node.getIdentificador())) {
+				node.setTipo(((TipoArray) node.getIdentificador().getTipo()).getTipo());
+				node.setModificable(true);
+			}
+		}
 
 		return null;
 	}
@@ -163,27 +246,6 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	@Override
 	public Object visit(TipoArray node, Object param) {
 		return node.getTipo();
-	}
-
-	@Override
-	public Object visit(AccesoArray node, Object param) {
-		super.visit(node, param);
-
-		predicado(esTipoEntero(node.getPosicion()), "[ERROR] Acceso Array: Solo se accede al array mediante un entero",
-				node.getStart());
-
-		if (esTipoEntero(node.getPosicion())) {
-			predicado(esTipoArray(node.getIdentificador()),
-					"[ERROR] Acceso Array: Solo se puede acceder al interior de variables si son arrays",
-					node.getStart());
-
-			if (esTipoArray(node.getIdentificador())) {
-				node.setTipo(((TipoArray) node.getIdentificador().getTipo()).getTipo());
-				node.setModificable(true);
-			}
-		}
-
-		return null;
 	}
 
 	@Override

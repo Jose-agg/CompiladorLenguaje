@@ -36,7 +36,7 @@ import visitor.ASTPrinter;
  */
 public class Main {
 
-	public static final String programa = "Archivos_Entrada/Test_Final.txt"; // Entrada a usar durante el desarrollo
+	public static final String programa = "Archivos_Entrada/TestFinal.txt"; // Entrada a usar durante el desarrollo
 	public static String fechaEjecucion;
 
 	public static void main(String[] args) throws Exception {

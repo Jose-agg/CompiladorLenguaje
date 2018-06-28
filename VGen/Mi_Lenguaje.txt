@@ -41,3 +41,5 @@ cast:expresion -> tipo expresion:expresion ;
 accesoArray:expresion -> identificador:expresion posicion:expresion ;
 accesoCampo:expresion -> expresion:expresion campo:string ;
 menosUnario:expresion -> expresion:expresion ;
+
+asignacionMultiple:sentencia -> left:expresion right:expresion*;

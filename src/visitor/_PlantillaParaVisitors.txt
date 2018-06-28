@@ -397,4 +397,19 @@ public class <nombre clase> extends DefaultVisitor {
 
 		return null;
 	}
+
+	//	class AsignacionMultiple { Expresion left;  List<Expresion> right; }
+	public Object visit(AsignacionMultiple node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getLeft() != null)
+			node.getLeft().accept(this, param);
+
+		if (node.getRight() != null)
+			for (Expresion child : node.getRight())
+				child.accept(this, param);
+
+		return null;
+	}
 }

@@ -242,6 +242,14 @@ public class DefaultVisitor implements Visitor {
 			node.getExpresion().accept(this, param);
 		return null;
 	}
+
+	//	class AsignacionMultiple { Expresion left;  List<Expresion> right; }
+	public Object visit(AsignacionMultiple node, Object param) {
+		if (node.getLeft() != null)
+			node.getLeft().accept(this, param);
+		visitChildren(node.getRight(), param);
+		return null;
+	}
 	
 	// Método auxiliar -----------------------------
 	protected void visitChildren(List<? extends AST> children, Object param) {

@@ -1,0 +1,16 @@
+main(){
+	var a:[5]int;
+	var i:int;
+	i=3;
+	
+	a = {i-2, i, i*5, 0-i, 9};
+	print a[0];
+	print ',';
+	print a[1];
+	print ',';
+	print a[2];
+	print ',';
+	print a[3];
+	print ',';
+	print a[4];
+}

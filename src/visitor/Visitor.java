@@ -40,4 +40,5 @@ public interface Visitor {
 	public Object visit(AccesoArray node, Object param);
 	public Object visit(AccesoCampo node, Object param);
 	public Object visit(MenosUnario node, Object param);
+	public Object visit(AsignacionMultiple node, Object param);
 }

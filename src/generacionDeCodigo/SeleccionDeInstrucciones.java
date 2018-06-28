@@ -9,12 +9,14 @@ import java.util.Map;
 import ast.AccesoArray;
 import ast.AccesoCampo;
 import ast.Asignacion;
+import ast.AsignacionMultiple;
 import ast.Cast;
 import ast.Cuerpo;
 import ast.DefCampo;
 import ast.DefEstructura;
 import ast.DefFuncion;
 import ast.DefVariable;
+import ast.Expresion;
 import ast.ExpresionAritmetica;
 import ast.ExpresionComparacion;
 import ast.IfElse;
@@ -175,6 +177,53 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		return null;
 	}
 
+	//	class AsignacionMultiple { Expresion left;  List<Expresion> right; }
+	public Object visit(AsignacionMultiple node, Object param) {
+		genera("#line " + node.getEnd().getLine());
+		int contador = 0;
+		for (Expresion e : node.getRight()) {
+			node.getLeft().accept(this, TipoAcceso.DIRECCION);
+			genera("push " + contador);
+			genera("push " + ((TipoArray) node.getLeft().getTipo()).getTipo().getSize());
+			genera("mul");
+			genera("add");
+			e.accept(this, TipoAcceso.VALOR);
+			genera("store", node.getLeft().getTipo());
+			contador++;
+		}
+		return null;
+	}
+
+	public Object visit(AccesoArray node, Object param) {
+		node.getIdentificador().accept(this, TipoAcceso.DIRECCION);
+		node.getPosicion().accept(this, TipoAcceso.VALOR);
+		genera("push " + ((TipoArray) node.getIdentificador().getTipo()).getTipo().getSize());
+		genera("mul");
+		genera("add");
+		if (param == TipoAcceso.VALOR) {
+			genera("load", node.getTipo());
+		}
+
+		return null;
+	}
+
+	public Object visit(Variable node, Object param) {
+		if (((TipoAcceso) param) == TipoAcceso.VALOR) {
+			visit(node, TipoAcceso.DIRECCION);
+			genera("load", node.getTipo());
+		} else { // Funcion.DIRECCION
+			assert (param == TipoAcceso.DIRECCION);
+			if (node.getDefinicion().getAmbito().equals("Global")) {
+				genera("pusha " + node.getDefinicion().getDireccion());
+			} else {
+				genera("pusha BP");
+				genera("push " + node.getDefinicion().getDireccion());
+				genera("add");
+			}
+		}
+		return null;
+	}
+
 	public Object visit(ExpresionAritmetica node, Object param) {
 		assert (param == TipoAcceso.VALOR);
 		node.getLeft().accept(this, TipoAcceso.VALOR);
@@ -199,36 +248,6 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		assert (param == TipoAcceso.VALOR);
 		super.visit(node, TipoAcceso.VALOR);
 		genera("not");
-		return null;
-	}
-
-	public Object visit(Variable node, Object param) {
-		if (((TipoAcceso) param) == TipoAcceso.VALOR) {
-			visit(node, TipoAcceso.DIRECCION);
-			genera("load", node.getTipo());
-		} else { // Funcion.DIRECCION
-			assert (param == TipoAcceso.DIRECCION);
-			if (node.getDefinicion().getAmbito().equals("Global")) {
-				genera("pusha " + node.getDefinicion().getDireccion());
-			} else {
-				genera("pusha BP");
-				genera("push " + node.getDefinicion().getDireccion());
-				genera("add");
-			}
-		}
-		return null;
-	}
-
-	public Object visit(AccesoArray node, Object param) {
-		node.getIdentificador().accept(this, TipoAcceso.DIRECCION);
-		node.getPosicion().accept(this, TipoAcceso.VALOR);
-		genera("push " + ((TipoArray) node.getIdentificador().getTipo()).getTipo().getSize());
-		genera("mul");
-		genera("add");
-		if (param == TipoAcceso.VALOR) {
-			genera("load", node.getTipo());
-		}
-
 		return null;
 	}
 
