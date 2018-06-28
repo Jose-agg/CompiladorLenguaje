@@ -1,4 +1,4 @@
-#source "Test_Final.txt"
+#source "codigo_TestFinal.txt"
 call main
 halt
 #TYPE Pareja:{
@@ -28,7 +28,7 @@ ret 0,0,0
 #LOCAL resultado:int
 f:
 enter 7
-#line 39
+#line 34
 pusha BP
 push -4
 add
@@ -39,7 +39,7 @@ loadf
 pushf 10.0
 mulf
 storef
-#line 40
+#line 35
 pusha BP
 push -5
 add
@@ -52,7 +52,7 @@ loadi
 push 256
 lti
 jz else1
-#line 42
+#line 37
 pusha BP
 push -5
 add
@@ -62,7 +62,7 @@ add
 loadi
 i2b
 storeb
-#line 43
+#line 38
 pusha BP
 push -7
 add
@@ -74,7 +74,7 @@ b2i
 storei
 jmp finIf1
 else1:
-#line 46
+#line 41
 pusha BP
 push -7
 add
@@ -85,7 +85,7 @@ loadf
 f2i
 storei
 finIf1:
-#line 48
+#line 43
 pusha BP
 push -7
 add
@@ -96,7 +96,7 @@ ret 2,7,6
 #LOCAL i:int
 inicializa:
 enter 2
-#line 55
+#line 50
 pusha 11
 push 0
 push 6
@@ -108,7 +108,7 @@ mul
 add
 push 0
 storei
-#line 56
+#line 51
 pusha 11
 push 0
 push 6
@@ -120,7 +120,7 @@ mul
 add
 push 1
 storei
-#line 57
+#line 52
 pusha 11
 push 0
 push 6
@@ -132,7 +132,7 @@ mul
 add
 push 1
 storei
-#line 58
+#line 53
 pusha BP
 push -2
 add
@@ -146,7 +146,7 @@ loadi
 push 8
 lti
 jz finWhile1
-#line 60
+#line 55
 pusha 11
 pusha BP
 push -2
@@ -175,7 +175,7 @@ mul
 add
 loadi
 storei
-#line 61
+#line 56
 pusha 11
 pusha BP
 push -2
@@ -204,7 +204,7 @@ mul
 add
 loadi
 storei
-#line 62
+#line 57
 pusha 11
 pusha BP
 push -2
@@ -245,7 +245,7 @@ add
 loadi
 addi
 storei
-#line 63
+#line 58
 pusha BP
 push -2
 add
@@ -265,28 +265,28 @@ ret 0,2,0
 #LOCAL j:int
 main:
 enter 4
-#line 73
+#line 68
 call p
-#line 75
+#line 70
 pusha BP
 push -2
 add
 push 0
 storei
-#line 76
+#line 71
 pusha 0
 push 2
 add
 pushb 48
 storeb
-#line 77
+#line 72
 pusha 0
 push 0
 add
 pushb 48
 b2i
 storei
-#line 79
+#line 74
 pusha BP
 push -2
 add
@@ -299,17 +299,17 @@ loadb
 b2i
 call f
 outi
-#line 80
+#line 75
 pushb 10
 outb
 pushf 1.3
 push 2
-#line 81
+#line 76
 call f
 pop
-#line 83
+#line 78
 call inicializa
-#line 84
+#line 79
 pusha BP
 push -2
 add
@@ -323,10 +323,10 @@ loadi
 push 8
 lti
 jz finWhile2
-#line 86
+#line 81
 pushb 40
 outb
-#line 87
+#line 82
 pusha BP
 push -2
 add
@@ -334,13 +334,13 @@ loadi
 push 1
 addi
 outi
-#line 88
+#line 83
 pushb 41
 outb
-#line 89
+#line 84
 pushb 32
 outb
-#line 90
+#line 85
 pusha 11
 pusha BP
 push -2
@@ -355,10 +355,10 @@ mul
 add
 loadi
 outi
-#line 91
+#line 86
 pushb 43
 outb
-#line 92
+#line 87
 pusha 11
 pusha BP
 push -2
@@ -373,10 +373,10 @@ mul
 add
 loadi
 outi
-#line 93
+#line 88
 pushb 61
 outb
-#line 94
+#line 89
 pusha 11
 pusha BP
 push -2
@@ -391,10 +391,10 @@ mul
 add
 loadi
 outi
-#line 95
+#line 90
 pushb 10
 outb
-#line 96
+#line 91
 pusha BP
 push -2
 add
@@ -407,7 +407,7 @@ addi
 storei
 jmp while2
 finWhile2:
-#line 99
+#line 94
 pusha 3
 push 1
 push 4
@@ -423,7 +423,7 @@ push 0
 add
 push 56
 storei
-#line 100
+#line 95
 pusha 3
 push 1
 push 4
@@ -439,10 +439,10 @@ push 0
 add
 loadi
 outi
-#line 101
+#line 96
 pushb 10
 outb
-#line 103
+#line 98
 pusha BP
 push -2
 add
@@ -456,7 +456,7 @@ loadi
 push 2
 lti
 jz finWhile3
-#line 105
+#line 100
 pusha BP
 push -4
 add
@@ -470,7 +470,7 @@ loadi
 push 2
 lti
 jz finWhile4
-#line 107
+#line 102
 pusha 3
 pusha BP
 push -2
@@ -500,7 +500,7 @@ add
 loadi
 addi
 storei
-#line 108
+#line 103
 pusha BP
 push -4
 add
@@ -513,7 +513,7 @@ addi
 storei
 jmp while4
 finWhile4:
-#line 110
+#line 105
 pusha BP
 push -2
 add
@@ -526,7 +526,7 @@ addi
 storei
 jmp while3
 finWhile3:
-#line 114
+#line 109
 pusha BP
 push -2
 add
@@ -540,7 +540,7 @@ loadi
 push 2
 lti
 jz finWhile5
-#line 116
+#line 111
 pusha BP
 push -4
 add
@@ -554,7 +554,7 @@ loadi
 push 2
 lti
 jz finWhile6
-#line 118
+#line 113
 pusha 3
 pusha BP
 push -2
@@ -576,10 +576,10 @@ push 0
 add
 loadi
 outi
-#line 119
+#line 114
 pushb 32
 outb
-#line 120
+#line 115
 pusha BP
 push -4
 add
@@ -592,7 +592,7 @@ addi
 storei
 jmp while6
 finWhile6:
-#line 122
+#line 117
 pusha BP
 push -2
 add

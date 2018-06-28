@@ -1,0 +1,608 @@
+#source "TestFinal.txt"
+call main
+halt
+#TYPE Pareja:{
+	entero:int
+	caracter:char
+}
+#GLOBAL pareja:Pareja
+#TYPE Empleado:{
+	edad:int
+}
+#TYPE Empresa:{
+	empleados:2 * Empleado
+}
+#GLOBAL acme:2 * Empresa
+#GLOBAL fibonacci:8 * 3 * int
+#FUNC p
+#RET VOID
+p:
+enter 0
+ret 0,0,0
+#FUNC f
+#PARAM paramReal:float
+#PARAM paramInt:int
+#RET int
+#LOCAL localReal:float
+#LOCAL digito:char
+#LOCAL resultado:int
+f:
+enter 7
+#line 34
+pusha BP
+push -4
+add
+pusha BP
+push 6
+add
+loadf
+pushf 10.0
+mulf
+storef
+#line 35
+pusha BP
+push -5
+add
+pushb 48
+storeb
+pusha BP
+push 4
+add
+loadi
+push 256
+lti
+jz else1
+#line 37
+pusha BP
+push -5
+add
+pusha BP
+push 4
+add
+loadi
+i2b
+storeb
+#line 38
+pusha BP
+push -7
+add
+pusha BP
+push -5
+add
+loadb
+b2i
+storei
+jmp finIf1
+else1:
+#line 41
+pusha BP
+push -7
+add
+pusha BP
+push -4
+add
+loadf
+f2i
+storei
+finIf1:
+#line 43
+pusha BP
+push -7
+add
+loadi
+ret 2,7,6
+#FUNC inicializa
+#RET VOID
+#LOCAL i:int
+inicializa:
+enter 2
+#line 50
+pusha 11
+push 0
+push 6
+mul
+add
+push 0
+push 2
+mul
+add
+push 0
+storei
+#line 51
+pusha 11
+push 0
+push 6
+mul
+add
+push 1
+push 2
+mul
+add
+push 1
+storei
+#line 52
+pusha 11
+push 0
+push 6
+mul
+add
+push 2
+push 2
+mul
+add
+push 1
+storei
+#line 53
+pusha BP
+push -2
+add
+push 1
+storei
+while1:
+pusha BP
+push -2
+add
+loadi
+push 8
+lti
+jz finWhile1
+#line 55
+pusha 11
+pusha BP
+push -2
+add
+loadi
+push 6
+mul
+add
+push 0
+push 2
+mul
+add
+pusha 11
+pusha BP
+push -2
+add
+loadi
+push 1
+subi
+push 6
+mul
+add
+push 1
+push 2
+mul
+add
+loadi
+storei
+#line 56
+pusha 11
+pusha BP
+push -2
+add
+loadi
+push 6
+mul
+add
+push 1
+push 2
+mul
+add
+pusha 11
+pusha BP
+push -2
+add
+loadi
+push 1
+subi
+push 6
+mul
+add
+push 2
+push 2
+mul
+add
+loadi
+storei
+#line 57
+pusha 11
+pusha BP
+push -2
+add
+loadi
+push 6
+mul
+add
+push 2
+push 2
+mul
+add
+pusha 11
+pusha BP
+push -2
+add
+loadi
+push 6
+mul
+add
+push 0
+push 2
+mul
+add
+loadi
+pusha 11
+pusha BP
+push -2
+add
+loadi
+push 6
+mul
+add
+push 1
+push 2
+mul
+add
+loadi
+addi
+storei
+#line 58
+pusha BP
+push -2
+add
+pusha BP
+push -2
+add
+loadi
+push 1
+addi
+storei
+jmp while1
+finWhile1:
+ret 0,2,0
+#FUNC main
+#RET VOID
+#LOCAL i:int
+#LOCAL j:int
+main:
+enter 4
+#line 68
+call p
+#line 70
+pusha BP
+push -2
+add
+push 0
+storei
+#line 71
+pusha 0
+push 2
+add
+pushb 48
+storeb
+#line 72
+pusha 0
+push 0
+add
+pushb 48
+b2i
+storei
+#line 74
+pusha BP
+push -2
+add
+loadi
+i2f
+pusha 0
+push 2
+add
+loadb
+b2i
+call f
+outi
+#line 75
+pushb 10
+outb
+pushf 1.3
+push 2
+#line 76
+call f
+pop
+#line 78
+call inicializa
+#line 79
+pusha BP
+push -2
+add
+push 0
+storei
+while2:
+pusha BP
+push -2
+add
+loadi
+push 8
+lti
+jz finWhile2
+#line 81
+pushb 40
+outb
+#line 82
+pusha BP
+push -2
+add
+loadi
+push 1
+addi
+outi
+#line 83
+pushb 41
+outb
+#line 84
+pushb 32
+outb
+#line 85
+pusha 11
+pusha BP
+push -2
+add
+loadi
+push 6
+mul
+add
+push 0
+push 2
+mul
+add
+loadi
+outi
+#line 86
+pushb 43
+outb
+#line 87
+pusha 11
+pusha BP
+push -2
+add
+loadi
+push 6
+mul
+add
+push 1
+push 2
+mul
+add
+loadi
+outi
+#line 88
+pushb 61
+outb
+#line 89
+pusha 11
+pusha BP
+push -2
+add
+loadi
+push 6
+mul
+add
+push 2
+push 2
+mul
+add
+loadi
+outi
+#line 90
+pushb 10
+outb
+#line 91
+pusha BP
+push -2
+add
+pusha BP
+push -2
+add
+loadi
+push 1
+addi
+storei
+jmp while2
+finWhile2:
+#line 94
+pusha 3
+push 1
+push 4
+mul
+add
+push 0
+add
+push 1
+push 2
+mul
+add
+push 0
+add
+push 56
+storei
+#line 95
+pusha 3
+push 1
+push 4
+mul
+add
+push 0
+add
+push 1
+push 2
+mul
+add
+push 0
+add
+loadi
+outi
+#line 96
+pushb 10
+outb
+#line 98
+pusha BP
+push -2
+add
+push 0
+storei
+while3:
+pusha BP
+push -2
+add
+loadi
+push 2
+lti
+jz finWhile3
+#line 100
+pusha BP
+push -4
+add
+push 0
+storei
+while4:
+pusha BP
+push -4
+add
+loadi
+push 2
+lti
+jz finWhile4
+#line 102
+pusha 3
+pusha BP
+push -2
+add
+loadi
+push 4
+mul
+add
+push 0
+add
+pusha BP
+push -4
+add
+loadi
+push 2
+mul
+add
+push 0
+add
+pusha BP
+push -2
+add
+loadi
+pusha BP
+push -4
+add
+loadi
+addi
+storei
+#line 103
+pusha BP
+push -4
+add
+pusha BP
+push -4
+add
+loadi
+push 1
+addi
+storei
+jmp while4
+finWhile4:
+#line 105
+pusha BP
+push -2
+add
+pusha BP
+push -2
+add
+loadi
+push 1
+addi
+storei
+jmp while3
+finWhile3:
+#line 109
+pusha BP
+push -2
+add
+push 0
+storei
+while5:
+pusha BP
+push -2
+add
+loadi
+push 2
+lti
+jz finWhile5
+#line 111
+pusha BP
+push -4
+add
+push 0
+storei
+while6:
+pusha BP
+push -4
+add
+loadi
+push 2
+lti
+jz finWhile6
+#line 113
+pusha 3
+pusha BP
+push -2
+add
+loadi
+push 4
+mul
+add
+push 0
+add
+pusha BP
+push -4
+add
+loadi
+push 2
+mul
+add
+push 0
+add
+loadi
+outi
+#line 114
+pushb 32
+outb
+#line 115
+pusha BP
+push -4
+add
+pusha BP
+push -4
+add
+loadi
+push 1
+addi
+storei
+jmp while6
+finWhile6:
+#line 117
+pusha BP
+push -2
+add
+pusha BP
+push -2
+add
+loadi
+push 1
+addi
+storei
+jmp while5
+finWhile5:
+ret 0,4,0
