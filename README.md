@@ -1,8 +1,8 @@
-# CompiladorLenguaje #
+# Compilador de Lenguaje #
 
 Este repositorio contiene el diseño, implementación y documentación de un compilador de lenguaje de programación aplicando las técnicas de construcción de procesadores de lenguajes vistas a lo largo de las clases de la asignatura de Diseño de Lenguajes de Programación del grado en Ingeniería Informática del Software impartida en la Universidad de Oviedo.
 
-## Autoria ##
+## Autoría ##
 
 Este proyecto fue desarrollado por José Antonio García García: [MrKarrter](https://github.com/MrKarrter). En su desarrollo se han utilizado cuatro herramientas para agilizar la implementación del mismo: 
 - [JFlex](http://www.jflex.de/)
@@ -23,22 +23,21 @@ Para facilitar la implementación de este proyecto se ha divido el trabajo en 6 
 
 ## Lenguaje ##
 
-Las caracteristicas del lenguaje que maneja este compilador se encuentran detalladas en el fichero: [Descripción del Lenguaje](https://github.com/MrKarrter/CompiladorLenguaje/blob/master/Archivos_Documentacion/Descripcion%20del%20Lenguaje.pdf). Los puntos más importantes serian:
+Las características del lenguaje que maneja este compilador se encuentran detalladas en el fichero: [Descripción del Lenguaje](https://github.com/MrKarrter/CompiladorLenguaje/blob/master/Archivos_Documentacion/Descripcion%20del%20Lenguaje.pdf). Los puntos más importantes serian:
  - Trabaja con 3 tipos simples: entero, float y char y 2 tipos compuestos: arrays y estructuras.
  - Las variables globales pueden estar definidas en cualquier parte del fichero y serán visibles únicamente en las funciones definidas posteriormente.
- - Las variables locales estarán definidas al principio de las funciones exclusivamente.
- - No hay conversion implicita al tipo de la izquierda.
- - No se pueden crear ni defincion multiple de variables **(a,b,c = 3)** ni asignacion multiple **( a = b = 0)**.
+ - Las variables locales estarán definidas al principio de las funciones exclusivamente. 
  - Se pueden realizar conversiones explicitas entre los tipos simples. **cast\<int>(5.6)**
+ - No hay conversión implícita al tipo de la izquierda.
  - La lista de operadores validos es la siguiente: **+ - * / < <= > >= == != &&(and) ||(or) !(not)**
  - Algunas de las sentencias que soporta: condicional (if else), iterativa (while), salida y entrada por consola (print, read), llamada a funciones y/o procedimientos **(a = f())** y **(f())**
- - Como ampliación se ha añadido al asignación multiple de arrays **(a = {444,555,666})**;
+ - Como ampliación se ha añadido al asignación múltiple de arrays **(a = {444,555,666})**;
 
-Un ejemplo de un programa de este lenguaje seria el siguiente:
+Un ejemplo de un programa de este lenguaje sería el siguiente:
 ```go
-// Comentarios de una linea
+// Comentarios de una línea
 /* Comentarios
-   de más de una linea */
+   de más de una línea */
 
 var numeroTelefono:int;
 var letraPreferida:char;
@@ -79,3 +78,4 @@ main(){
 
 }
 ```
+
